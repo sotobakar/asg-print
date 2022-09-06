@@ -25,13 +25,22 @@ class AuthController extends Controller
      * View login page of user.
      */
     public function loginPage(Request $request) {
-        return view('customer.products.index');
+        return view('customer.auth.login');
     }
 
     /**
      * View register page of user.
      */
     public function registerPage(Request $request) {
-        return view('customer.products.index');
+        return view('customer.auth.register');
     }
+
+    /**
+     * View under construction page.
+     */
+    public function underConstruction(Request $request) {
+        return view('customer.errors.under_construction');
+    }
+
+
 }
