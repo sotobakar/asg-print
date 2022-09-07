@@ -20,7 +20,6 @@ class CreateProdukTable extends Migration
             $table->integer('harga_produk');
             $table->string('foto_produk', 100);
             $table->text('deskripsi_produk');
-            $table->integer('stok_produk');
         });
     }
 
