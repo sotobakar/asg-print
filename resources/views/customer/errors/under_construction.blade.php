@@ -12,7 +12,7 @@
                 <div class="flex flex-shrink-0 justify-center">
                     <a href="/" class="inline-flex">
                         <span class="sr-only">ASG Print</span>
-                        <img class="h-12 w-auto" src={{ asset('images/logo.png') }}
+                        <img class="h-12 w-auto" src={{ url('assets/images/logo.png') }}
                             alt="">
                     </a>
                 </div>

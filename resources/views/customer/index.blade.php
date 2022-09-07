@@ -36,7 +36,7 @@
               <!-- Slides -->
               @for ($i = 1; $i < 9; $i++)
                   <img class="swiper-slide absolute inset-0 h-full w-full object-fit"
-                      src={{ asset("images/slider/$i.jpeg") }} alt="Foto {{ $i }}">
+                      src={{ url("assets/images/slider/$i.jpeg") }} alt="Foto {{ $i }}">
               @endfor
           </div>
       </div>

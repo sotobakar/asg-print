@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
-    <link rel="shortcut icon" href={{ asset('images/icon/favicon.ico') }} type="image/x-icon">
+    <link rel="shortcut icon" href={{ url('assets/images/icon/favicon.ico') }} type="image/x-icon">
     @vite('resources/css/app.css')
     @yield('css')
 </head>
@@ -18,7 +18,7 @@
                     <div class="flex justify-start lg:w-0 lg:flex-1">
                         <a href="#">
                             <span class="sr-only">ASG Print</span>
-                            <img class="h-8 w-auto sm:h-10" src={{ asset('images/logo.png') }} alt="">
+                            <img class="h-8 w-auto sm:h-10" src={{ url('assets/images/logo.png') }} alt="">
                         </a>
                     </div>
                     <div class="-my-2 -mr-2 md:hidden">
@@ -60,7 +60,7 @@
         <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
             <div class="xl:grid xl:grid-cols-3 xl:gap-8">
                 <div class="space-y-8 xl:col-span-1">
-                    <img class="h-10" src={{ asset('images/logo.png') }} alt="Company name">
+                    <img class="h-10" src={{ url('assets/images/logo.png') }} alt="Company name">
                     <p class="text-base text-gray-500">Cetak Kaos Satuan dan Lusinan. Kaos, Hoodie, Totebag, Bordir, Jersey dll.</p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-gray-500">
