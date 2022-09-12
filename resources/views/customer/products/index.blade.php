@@ -32,7 +32,7 @@
                                         <div class="mt-6">
                                             <p class="text-sm text-gray-500">M | L | XL | XXL</p>
                                             <h3 class="mt-1 font-semibold text-gray-900">
-                                                <a href="#">
+                                                <a href="{{ route('customer.products.detail', ['product' => $product->id_produk]) }}">
                                                     <span class="absolute inset-0"></span>
                                                     {{ $product->nama_produk }}
                                                 </a>

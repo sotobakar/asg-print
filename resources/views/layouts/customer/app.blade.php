@@ -36,16 +36,24 @@
                     </div>
                     <nav class="hidden space-x-10 md:flex">
                         <a href="/" class="text-base font-medium text-secondary hover:text-gray-900">Home</a>
-                        <a href={{ route('products') }} class="text-base font-medium text-gray-500  hover:text-gray-900">Produk</a>
-                        <a href={{ route('customer.cart') }} class="text-base font-medium text-gray-500 hover:text-gray-900">Keranjang</a>
-                        <a href={{ route('customer.design') }} class="text-base font-medium text-gray-500 hover:text-gray-900">Custom
+                        <a href={{ route('products') }}
+                            class="text-base font-medium text-gray-500  hover:text-gray-900">Produk</a>
+                        <a href={{ route('customer.cart') }}
+                            class="text-base font-medium text-gray-500 hover:text-gray-900">Keranjang</a>
+                        <a href={{ route('customer.design') }}
+                            class="text-base font-medium text-gray-500 hover:text-gray-900">Custom
                             Sablon</a>
                     </nav>
                     <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-                        <a href={{ route('customer.login') }}
-                            class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">Masuk</a>
-                        <a href={{ route('customer.register') }}
-                            class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-primary-700 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-900">Daftar</a>
+                        @if (Auth::user())
+                            <div class="text-lg">{{ "Halo, " . Auth::user()->nama }}</div>
+                        @else
+                            <a href={{ route('customer.login') }}
+                                class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">Masuk</a>
+                            <a href={{ route('customer.register') }}
+                                class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-primary-700 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-900">Daftar</a>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -61,7 +69,8 @@
             <div class="xl:grid xl:grid-cols-3 xl:gap-8">
                 <div class="space-y-8 xl:col-span-1">
                     <img class="h-10" src={{ url('assets/images/logo.png') }} alt="Company name">
-                    <p class="text-base text-gray-500">Cetak Kaos Satuan dan Lusinan. Kaos, Hoodie, Totebag, Bordir, Jersey dll.</p>
+                    <p class="text-base text-gray-500">Cetak Kaos Satuan dan Lusinan. Kaos, Hoodie, Totebag, Bordir,
+                        Jersey dll.</p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-gray-500">
                             <span class="sr-only">Instagram</span>
