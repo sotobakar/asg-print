@@ -38,6 +38,36 @@
                     </ol>
                 </nav>
                 <div class="mx-auto mt-8 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                    @if (session('success'))
+                        <div class="rounded-md bg-green-50 p-4 mb-4 ">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <!-- Heroicon name: mini/check-circle -->
+                                    <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="text-sm font-medium text-green-800">Berhasil menambahkan ke keranjang.</h3>
+                                    <div class="mt-2 text-sm text-green-700">
+                                        <p>{{ 'Produk ' . $product->nama_produk . ' sudah ada di keranjangmu. Silahkan checkout atau belanja lagi.' }}
+                                        </p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <div class="-mx-2 -my-1.5 flex">
+                                            <a href={{ route('customer.cart') }}
+                                                class="rounded-md bg-green-50 px-2 py-1.5 text-sm font-medium text-green-800 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50">Checkout</a>
+                                            <button type="button"
+                                                class="ml-3 rounded-md bg-green-50 px-2 py-1.5 text-sm font-medium text-green-800 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50">Tutup</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <div class="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
                         <div class="lg:col-span-5 lg:col-start-8">
                             <div class="flex justify-between">
@@ -57,16 +87,16 @@
                             <form>
                                 <!-- Color picker -->
                                 <div>
-                                    <h2 class="text-sm font-medium text-gray-900">Color</h2>
+                                    <h2 class="text-sm font-medium text-gray-900">Pilih warna</h2>
 
                                     <fieldset class="mt-2">
                                         <legend class="sr-only">Choose a color</legend>
                                         <form action="?" method="GET">
                                             <div class="flex items-center space-x-3">
                                                 <!--
-                                                        Active and Checked: "ring ring-offset-1"
-                                                        Not Active and Checked: "ring-2"
-                                                      -->
+                                                                Active and Checked: "ring ring-offset-1"
+                                                                Not Active and Checked: "ring-2"
+                                                              -->
                                                 @foreach ($product_colors as $color)
                                                     <label
                                                         class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-900">
@@ -82,9 +112,9 @@
                                                 @endforeach
 
                                                 <!--
-                                                        Active and Checked: "ring ring-offset-1"
-                                                        Not Active and Checked: "ring-2"
-                                                      -->
+                                                                Active and Checked: "ring ring-offset-1"
+                                                                Not Active and Checked: "ring-2"
+                                                              -->
                                             </div>
                                         </form>
                                     </fieldset>
@@ -93,7 +123,7 @@
                                 <!-- Size picker -->
                                 <div class="mt-8">
                                     <div class="flex items-center justify-between">
-                                        <h2 class="text-sm font-medium text-gray-900">Size</h2>
+                                        <h2 class="text-sm font-medium text-gray-900">Pilih ukuran yang tersedia</h2>
                                     </div>
 
                                     <fieldset class="mt-2">
@@ -105,15 +135,10 @@
                                                     <label
                                                         class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1 cursor-pointer focus:outline-none">
                                                         <input type="radio" name="sku[]" value={{ $sku->id }}
-                                                            class="sr-only" aria-labelledby="size-choice-0-label">
+                                                            class="sr-only" aria-labelledby="size-choice-0-label" required>
                                                         <span id="size-choice-0-label">{{ $sku->ukuran }}</span>
                                                     </label>
                                                 @endforeach
-                                                <!--
-                                                        In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
-                                                        Active: "ring-2 ring-offset-2 ring-indigo-500"
-                                                        Checked: "bg-indigo-600 border-transparent text-white hover:bg-indigo-700", Not Checked: "bg-white border-gray-200 text-gray-900 hover:bg-gray-50"
-                                                      -->
                                             </div>
                                         </form>
                                     </fieldset>

@@ -30,7 +30,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'registerPage'])->name('customer.register');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/keranjang', [AuthController::class, 'underConstruction'])->name('customer.cart');
+    Route::get('/keranjang', [CartController::class, 'userCart'])->name('customer.cart');
     Route::post('/keranjang', [CartController::class, 'add'])->name('customer.cart.add');
     Route::get('/desain', [AuthController::class, 'underConstruction'])->name('customer.design');
 });
