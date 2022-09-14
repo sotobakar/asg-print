@@ -29,4 +29,12 @@ class Cart extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * Get the SKU that is in the cart.
+     */
+    public function sku()
+    {
+        return $this->belongsTo(ProductSku::class, 'id_sku');
+    }
 }

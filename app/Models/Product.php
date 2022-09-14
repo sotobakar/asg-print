@@ -29,4 +29,12 @@ class Product extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * Get the category of product.
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'id_kategori');
+    }
 }

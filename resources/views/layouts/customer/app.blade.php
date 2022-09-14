@@ -35,13 +35,13 @@
                         </button>
                     </div>
                     <nav class="hidden space-x-10 md:flex">
-                        <a href="/" class="text-base font-medium text-secondary hover:text-gray-900">Home</a>
+                        <a href="/" class="text-base font-medium {{ request()->segment(1) == '' ? 'text-secondary' : 'text-gray-500' }}">Home</a>
                         <a href={{ route('products') }}
-                            class="text-base font-medium text-gray-500  hover:text-gray-900">Produk</a>
+                            class="text-base font-medium {{ request()->segment(1) == 'produk' ? 'text-secondary' : 'text-gray-500' }}">Produk</a>
                         <a href={{ route('customer.cart') }}
-                            class="text-base font-medium text-gray-500 hover:text-gray-900">Keranjang</a>
+                            class="text-base font-medium {{ request()->segment(1) == 'keranjang' ? 'text-secondary' : 'text-gray-500' }}">Keranjang</a>
                         <a href={{ route('customer.design') }}
-                            class="text-base font-medium text-gray-500 hover:text-gray-900">Custom
+                            class="text-base font-medium {{ request()->segment(1) == 'desain' ? 'text-secondary' : 'text-gray-500' }}">Custom
                             Sablon</a>
                     </nav>
                     <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">

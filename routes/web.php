@@ -32,6 +32,8 @@ Route::get('/register', [AuthController::class, 'registerPage'])->name('customer
 Route::middleware(['auth'])->group(function () {
     Route::get('/keranjang', [CartController::class, 'userCart'])->name('customer.cart');
     Route::post('/keranjang', [CartController::class, 'add'])->name('customer.cart.add');
+    Route::put('/keranjang/{cart:id}', [CartController::class, 'update'])->name('customer.cart.update');
+    Route::delete('/keranjang/{cart:id}', [CartController::class, 'remove'])->name('customer.cart.remove');
     Route::get('/desain', [AuthController::class, 'underConstruction'])->name('customer.design');
 });
 

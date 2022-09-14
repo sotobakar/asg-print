@@ -31,29 +31,53 @@ class CartController extends Controller
     public function userCart(Request $request)
     {
         $cart = Cart::where('id_user', auth()->id())
+            ->with('sku.product.category')
             ->get();
 
+        $subtotal = 0;
+        foreach ($cart as $cartItem) {
+            $subtotal += $cartItem->sku->product->harga_produk * $cartItem->jumlah;
+        }
+
+        $ongkir = 10000;
+
         return view('customer.cart.index', [
-            'cart' => $cart
+            'cart' => $cart,
+            'subtotal' => $subtotal,
+            'ongkir' => $ongkir,
+            'total' => $subtotal + $ongkir
         ]);
     }
 
-    public function updateCart(Request $request, Cart $cart)
+    public function update(Request $request, Cart $cart)
     {
         $cart->update([
-            'jumlah' => $request->input('jumlah')
+            'jumlah' => $request->input('quantity')
         ]);
 
         return back()->with('success', 'Keranjang diupdate');
     }
-    
+
+    public function remove(Request $request, Cart $cart)
+    {
+        $cart->delete();
+
+        return back()->with('success', 'Keranjang diupdate');
+    }
+
     public function checkout(Request $request)
     {
         $cart = Cart::where('id_user', auth()->id())
             ->get();
 
+        $subtotal = 0;
+        foreach ($cart as $cartItem) {
+            $subtotal += $cartItem->sku->product->harga_produk * $cartItem->jumlah;
+        }
+
         return view('customer.cart', [
-            'cart' => $cart
+            'cart' => $cart,
+            'subtotal' => $subtotal
         ]);
     }
 }

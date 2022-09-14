@@ -29,7 +29,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Show products sorted by name.
+     * Show product detail page.
      */
     public function detail(Request $request, Product $product)
     {
@@ -39,6 +39,7 @@ class ProductController extends Controller
         if ($color) {
             $skus = ProductSku::where('id_produk', $product->id_produk)
                 ->where('warna', $color)
+                ->where('stok', '!=', 0)
                 ->get();
         }
 
