@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -30,7 +32,22 @@ class AuthController extends Controller
      * Register new customer.
      */
     public function register(Request $request) {
-        return view('customer.products.index');
+        Log::info(App::currentLocale());
+        $validated = $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'nama' => 'required|string|alpha',
+            'phone' => 'required|starts_with:0',
+            'password' => 'required|confirmed',
+            'alamat' => 'required'
+        ]);
+
+        $validated['password'] = bcrypt($validated['password']);
+
+        $user = User::create($validated);
+
+        Auth::login($user);
+
+        return redirect()->route('customer.index');
     }
 
     /**

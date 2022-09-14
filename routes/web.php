@@ -28,6 +28,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // TODO: Register route
 Route::get('/register', [AuthController::class, 'registerPage'])->name('customer.register');
+Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/keranjang', [CartController::class, 'userCart'])->name('customer.cart');
