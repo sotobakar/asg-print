@@ -35,7 +35,7 @@ class AuthController extends Controller
         Log::info(App::currentLocale());
         $validated = $request->validate([
             'email' => 'required|email|unique:users,email',
-            'nama' => 'required|string|alpha',
+            'nama' => 'required|string|regex:/^[a-zA-Z ]*$/',
             'phone' => 'required|starts_with:0',
             'password' => 'required|confirmed',
             'alamat' => 'required'
