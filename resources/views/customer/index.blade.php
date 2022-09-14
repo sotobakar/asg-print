@@ -49,7 +49,7 @@
 <script>
     const swiper = new Swiper('.swiper', {
         autoplay: {
-            delay: 4000,
+            delay: 2000,
         },
     });
 </script>

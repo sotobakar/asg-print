@@ -8,7 +8,7 @@
 @section('content')
     <main class="lg:relative">
         <div class="bg-white">
-            <div class="py-16 sm:py-24 lg:mx-auto lg:max-w-7xl lg:px-8">
+            <div class="py-16 sm:py-20 lg:mx-auto lg:max-w-7xl lg:px-8">
                 <div class="flex items-center justify-between px-4 sm:px-6 lg:px-0">
                     <h2 class="text-2xl font-bold tracking-tight text-gray-900">New Arrival</h2>
                     <a href="#" class="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block">
@@ -39,12 +39,6 @@
                                             </h3>
                                             <p class="mt-1 text-gray-900 font-medium">IDR {{ $product->harga_produk }}</p>
                                         </div>
-                                    </div>
-
-                                    <div class="mt-6">
-                                        <a href="#"
-                                            class="relative flex items-center justify-center rounded-md border border-transparent bg-gray-100 py-2 px-8 text-sm font-medium text-gray-900 hover:bg-gray-200">Tambah
-                                            ke Keranjang</a>
                                     </div>
                                 </li>
                             @endforeach

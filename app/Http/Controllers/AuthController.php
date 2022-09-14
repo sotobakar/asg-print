@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -29,10 +27,17 @@ class AuthController extends Controller
     }
 
     /**
+     * Log user out of session.
+     */
+    public function logout(Request $request) {
+        Auth::logout();
+        return redirect('/');
+    }
+
+    /**
      * Register new customer.
      */
     public function register(Request $request) {
-        Log::info(App::currentLocale());
         $validated = $request->validate([
             'email' => 'required|email|unique:users,email',
             'nama' => 'required|string|regex:/^[a-zA-Z ]*$/',
@@ -43,11 +48,18 @@ class AuthController extends Controller
 
         $validated['password'] = bcrypt($validated['password']);
 
-        $user = User::create($validated);
+        $user = User::create([
+            'email' => $validated['email'],
+            'nama' => $validated['nama'],
+            'password' => $validated['password'],
+            'telepon' => $validated['phone'],
+            'alamat' => $validated['alamat'],
+            'role' => 'customer'
+        ]);
 
         Auth::login($user);
 
-        return redirect()->route('customer.index');
+        return redirect()->route('customer.home');
     }
 
     /**
