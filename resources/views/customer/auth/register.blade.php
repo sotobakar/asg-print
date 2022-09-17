@@ -106,14 +106,6 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-between">
-                            <div class="flex">
-                                <input id="agreement" name="agreement" type="checkbox"
-                                    class="self-center mr-1 h-6 w-6 rounded border-gray-300 text-primary-600 focus:ring-primary-500">
-                                <label for="agreement" class="ml-2 block text-sm text-gray-900">Mendaftar berarti Anda setuju kami menyimpan data pribadi yang diberikan di form ini. Kami tidak akan menyebarkan data Anda ke pihak lain.</label>
-                            </div>
-                        </div>
-
                         <div>
                             <button type="submit"
                                 class="flex w-full justify-center rounded-md border border-transparent bg-primary-700 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Daftarkan

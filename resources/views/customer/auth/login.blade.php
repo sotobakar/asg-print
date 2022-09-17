@@ -22,7 +22,7 @@
                 <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Masuk ke akun anda</h2>
                 <p class="mt-2 text-center text-sm text-gray-600">
                     atau
-                    <a href="#" class="font-medium text-primary-700 hover:text-primary-600">daftar disini.</a>
+                    <a href="/register" class="font-medium text-primary-700 hover:text-primary-600">daftar disini.</a>
                 </p>
             </div>
 
