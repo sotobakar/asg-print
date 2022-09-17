@@ -18,16 +18,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('customer.index');
-});
+})->name('customer.home');
 
 Route::get('/produk', [ProductController::class, 'index'])->name('products');
 Route::get('/produk/detail/{product:id_produk}', [ProductController::class, 'detail'])->name('customer.products.detail');
 
 Route::get('/login', [AuthController::class, 'loginPage'])->name('customer.login');
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/logout', [AuthController::class, 'logout'])->name('customer.logout');
 
 // TODO: Register route
 Route::get('/register', [AuthController::class, 'registerPage'])->name('customer.register');
+Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/keranjang', [CartController::class, 'userCart'])->name('customer.cart');

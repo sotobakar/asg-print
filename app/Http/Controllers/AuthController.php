@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -27,10 +27,39 @@ class AuthController extends Controller
     }
 
     /**
+     * Log user out of session.
+     */
+    public function logout(Request $request) {
+        Auth::logout();
+        return redirect('/');
+    }
+
+    /**
      * Register new customer.
      */
     public function register(Request $request) {
-        return view('customer.products.index');
+        $validated = $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'nama' => 'required|string|regex:/^[a-zA-Z ]*$/',
+            'phone' => 'required|starts_with:0',
+            'password' => 'required|confirmed',
+            'alamat' => 'required'
+        ]);
+
+        $validated['password'] = bcrypt($validated['password']);
+
+        $user = User::create([
+            'email' => $validated['email'],
+            'nama' => $validated['nama'],
+            'password' => $validated['password'],
+            'telepon' => $validated['phone'],
+            'alamat' => $validated['alamat'],
+            'role' => 'customer'
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->route('customer.home');
     }
 
     /**

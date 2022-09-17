@@ -46,7 +46,9 @@
                     </nav>
                     <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
                         @if (Auth::user())
-                            <div class="text-lg">{{ "Halo, " . Auth::user()->nama }}</div>
+                            <div class="text-sm font-medium text-secondary ">{{ Auth::user()->nama }}</div>
+                            <a href={{ route('customer.logout') }}
+                            class="ml-8 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">Logout</a>
                         @else
                             <a href={{ route('customer.login') }}
                                 class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">Masuk</a>
