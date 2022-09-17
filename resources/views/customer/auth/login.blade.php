@@ -54,9 +54,9 @@
                                 <label for="remember-me" class="ml-2 block text-sm text-gray-900">Ingat saya</label>
                             </div>
 
-                            <div class="text-sm">
+                            {{-- <div class="text-sm">
                                 <a href="#" class="font-medium text-primary-600 hover:text-primary-500">Lupa password?</a>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div>
@@ -65,7 +65,7 @@
                         </div>
                     </form>
 
-                    <div class="mt-6">
+                    {{-- <div class="mt-6">
                         <div class="relative">
                             <div class="absolute inset-0 flex items-center">
                                 <div class="w-full border-t border-gray-300"></div>
@@ -91,7 +91,7 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
