@@ -22,4 +22,11 @@ class Category extends Model
      * @var string
      */
     protected $primaryKey = 'id_kategori';
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

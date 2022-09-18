@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductSku;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,17 +16,21 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = DB::table('produk')
-            ->limit(4)
-            ->get();
+        $products = [];
 
-        $products = $products->map(function ($obj) {
-            $obj->harga_produk = number_format($obj->harga_produk);
-            return $obj;
-        });
+        // TODO: Get 4 products for each category
+        $categories = Category::get();
+
+        foreach($categories as $category) {
+            $products[$category->nama_kategori] = DB::table('produk')
+                                        ->where('id_kategori', $category->id_kategori)
+                                        ->limit(4)
+                                        ->get();
+                                        // ->toArray();
+        }
 
         return view('customer.products.index', [
-            'products' => $products
+            'all_products' => $products
         ]);
     }
 

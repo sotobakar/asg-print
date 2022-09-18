@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,15 +28,30 @@ Route::get('/login', [AuthController::class, 'loginPage'])->name('customer.login
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('customer.logout');
 
-// TODO: Register route
 Route::get('/register', [AuthController::class, 'registerPage'])->name('customer.register');
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/keranjang', [CartController::class, 'userCart'])->name('customer.cart');
-    Route::post('/keranjang', [CartController::class, 'add'])->name('customer.cart.add');
-    Route::put('/keranjang/{cart:id}', [CartController::class, 'update'])->name('customer.cart.update');
-    Route::delete('/keranjang/{cart:id}', [CartController::class, 'remove'])->name('customer.cart.remove');
+    // Cart
+    Route::prefix('keranjang')->group(function () {  
+        Route::get('/', [CartController::class, 'userCart'])->name('customer.cart');
+        Route::post('/checkout', [CartController::class, 'checkout'])->name('customer.cart.checkout');
+        Route::post('/', [CartController::class, 'add'])->name('customer.cart.add');
+        Route::put('/{cart:id}', [CartController::class, 'update'])->name('customer.cart.update');
+        Route::delete('/{cart:id}', [CartController::class, 'remove'])->name('customer.cart.remove');
+    });
+    
+    // My Orders (Pesananku)
+    Route::prefix('pesanan')->group(function () {
+        Route::get('/', [AuthController::class, 'underConstruction'])->name('customer.orders');
+        Route::get('/detail/{order:id_pembelian}', [AuthController::class, 'underConstruction'])->name('customer.orders.detail');
+    });
+
+    // Profile
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [AuthController::class, 'underConstruction'])->name('customer.profile');
+    });
+
     Route::get('/desain', [AuthController::class, 'underConstruction'])->name('customer.design');
 });
 

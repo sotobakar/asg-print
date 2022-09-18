@@ -35,7 +35,8 @@
                         </button>
                     </div>
                     <nav class="hidden space-x-10 md:flex">
-                        <a href="/" class="text-base font-medium {{ request()->segment(1) == '' ? 'text-secondary' : 'text-gray-500' }}">Home</a>
+                        <a href="/"
+                            class="text-base font-medium {{ request()->segment(1) == '' ? 'text-secondary' : 'text-gray-500' }}">Home</a>
                         <a href={{ route('products') }}
                             class="text-base font-medium {{ request()->segment(1) == 'produk' ? 'text-secondary' : 'text-gray-500' }}">Produk</a>
                         <a href={{ route('customer.cart') }}
@@ -46,14 +47,43 @@
                     </nav>
                     <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
                         @if (Auth::user())
-                            <div class="text-sm font-medium text-secondary ">{{ Auth::user()->nama }}</div>
-                            <a href={{ route('customer.logout') }}
-                            class="ml-8 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">Logout</a>
+                        <div class="relative">
+                            <a id="user_menu" href="#"
+                                class="flex items-center p-2 rounded-md text-sm font-medium text-secondary hover:bg-gray-100">
+                                <h3>{{ ucwords(Auth::user()->nama) }}</h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
+                                    stroke="currentColor" class="ml-2 w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </a>
+                            <div id="user_menu_dropdown"
+                                class="hidden absolute z-10 mt-3 max-w-xs -translate-x-1/2 transform">
+                                <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+                                    <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 w-40">
+                                        <a href={{ route('customer.orders') }}
+                                            class="-m-3 block rounded-md p-2 transition duration-150 ease-in-out hover:bg-gray-100">
+                                            <p class="text-base font-medium text-gray-900">Pesanan</p>
+                                        </a>
+
+                                        <a href={{ route('customer.profile') }}
+                                            class="-m-3 block rounded-md p-2 transition duration-150 ease-in-out hover:bg-gray-100">
+                                            <p class="text-base font-medium text-gray-900">Profil</p>
+                                        </a>
+
+                                        <a href="{{ route('customer.logout') }}"
+                                            class="-m-3 block rounded-md p-2 transition duration-150 ease-in-out hover:bg-gray-100">
+                                            <p class="text-base font-medium text-primary-700">Keluar</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         @else
-                            <a href={{ route('customer.login') }}
-                                class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">Masuk</a>
-                            <a href={{ route('customer.register') }}
-                                class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-primary-700 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-900">Daftar</a>
+                        <a href={{ route('customer.login') }}
+                            class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">Masuk</a>
+                        <a href={{ route('customer.register') }}
+                            class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-primary-700 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-900">Daftar</a>
                         @endif
 
                     </div>
@@ -73,7 +103,8 @@
                     <img class="h-10" src={{ url('assets/images/logo.png') }} alt="Company name">
                     <p class="text-base text-gray-500">Cetak Kaos Satuan dan Lusinan. Kaos, Hoodie, Totebag, Bordir,
                         Jersey dll.</p>
-                    <a href="https://instagram.com/asg_print?igshid=YmMyMTA2M2Y=" target="_blank" class="flex space-x-4">
+                    <a href="https://instagram.com/asg_print?igshid=YmMyMTA2M2Y=" target="_blank"
+                        class="flex space-x-4">
                         <div class="text-gray-400 hover:text-gray-500">
                             <span class="sr-only">Instagram</span>
                             <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -99,11 +130,13 @@
                         <div class="flex">
                             <div class="flex-1">
                                 <h4 class="font-bold text-base">Alamat</h4>
-                                <span class="text-sm">Jalan Raya Kincan Blok B No. 28, RT.001/RW.002, Jatibening Baru, Kec. Pd. Gede, Kota Bekasi, Jawa Barat 17412</p>
+                                <span class="text-sm">Jalan Raya Kincan Blok B No. 28, RT.001/RW.002, Jatibening Baru,
+                                    Kec. Pd. Gede, Kota Bekasi, Jawa Barat 17412</p>
                             </div>
                             <div class="w-24 h-24">
                                 <a href="https://maps.app.goo.gl/ZmVqPU1gu5AozN9t6" target="_blank" class="block">
-                                    <img class="w-full h-full aspect-square" src={{ url('assets/images/map.png')}} alt="Cetak Sablon ASG Print">
+                                    <img class="w-full h-full aspect-square" src={{ url('assets/images/map.png')}}
+                                        alt="Cetak Sablon ASG Print">
                                 </a>
                             </div>
                         </div>
@@ -114,6 +147,9 @@
     </footer>
 
     @yield('js')
+    @if(Auth::user())
+    <script src={{ url('assets/js/customer/index.js') }}></script>
+    @endif
 </body>
 
 </html>

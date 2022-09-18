@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
@@ -39,11 +41,15 @@ class CartController extends Controller
             $subtotal += $cartItem->sku->product->harga_produk * $cartItem->jumlah;
         }
 
+        $cities = DB::table('ongkir')
+                    ->get();
+
         $ongkir = 10000;
 
         return view('customer.cart.index', [
             'cart' => $cart,
             'subtotal' => $subtotal,
+            'cities' => $cities,
             'ongkir' => $ongkir,
             'total' => $subtotal + $ongkir
         ]);
@@ -67,6 +73,7 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
+        return redirect()->route('customer.orders');
         $cart = Cart::where('id_user', auth()->id())
             ->get();
 
@@ -75,9 +82,44 @@ class CartController extends Controller
             $subtotal += $cartItem->sku->product->harga_produk * $cartItem->jumlah;
         }
 
-        return view('customer.cart', [
-            'cart' => $cart,
-            'subtotal' => $subtotal
-        ]);
+        // Get city destination (for ongkir)
+        $city_destination = $request->input('kota_tujuan');
+        $ongkir = DB::table('ongkir')
+            ->where('id_ongkir', $city_destination)
+            ->first();
+
+        // Get customer address if box checked (else get custom address)
+        $address = '';
+        if ($request->input('my_address')) {
+            $address = auth()->user()->alamat;
+        } else {
+            $address = $request->input('alamat_lengkap');
+        }
+
+        // Create order
+        $order = DB::table('pembelian')
+                    ->insertGetId([
+                        'id_user' => auth()->id(),
+                        'id_ongkir' => $ongkir->id_ongkir,
+                        'tanggal_pembelian' => Carbon::now('Asia/Jakarta')->toDateString(),
+                        'total_pembelian' => $subtotal + $ongkir->tarif,
+                        'alamat_pengiriman' => $address,
+                        'status_pembelian' => 'pending'
+                    ]);
+        
+        // Insert items from cart
+        foreach($cart as $cartItem) {
+            DB::table('pembelian_produk')
+                ->insert([
+                    'id_pembelian' => $order,
+                    'id_sku' => $cartItem->sku->id,
+                    'jumlah' => $cartItem->jumlah,
+                    'nama' => $cartItem->sku->product->nama_produk,
+                    'harga' => $cartItem->sku->product->harga_produk,
+                    'subharga' => $cartItem->sku->product->harga_produk * $cartItem->jumlah
+                ]);
+        }
+
+        return redirect()->route('customer.orders');
     }
 }
