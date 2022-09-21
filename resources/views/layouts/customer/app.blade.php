@@ -119,7 +119,7 @@
                 <div class="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
                     <div class="flex flex-col gap-y-2">
                         <h4 class="font-bold text-base">Informasi</h4>
-                        <div class="grid grid-cols-1 gap-2 text-md font-medium text-primary-700">
+                        <div class="flex flex-col items-start gap-2 text-md font-medium text-primary-700">
                             <a href="/" class="hover:text-primary-900">Landing Page</a>
                             <a href="/produk" class="hover:text-primary-900">Produk Kami</a>
                             <a href="/keranjang" class="hover:text-primary-900">Keranjang</a>
@@ -140,6 +140,10 @@
                                 </a>
                             </div>
                         </div>
+                        <a class="block mt-8" target="_blank" aria-label="Chat on WhatsApp"
+                            href="https://wa.me/6282116214746"> <img alt="Chat on WhatsApp" src={{
+                                url('assets/images/WhatsAppButton.svg') }} />
+                        </a>
                     </div>
                 </div>
             </div>

@@ -73,7 +73,6 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
-        return redirect()->route('customer.orders');
         $cart = Cart::where('id_user', auth()->id())
             ->get();
 
@@ -118,6 +117,11 @@ class CartController extends Controller
                     'harga' => $cartItem->sku->product->harga_produk,
                     'subharga' => $cartItem->sku->product->harga_produk * $cartItem->jumlah
                 ]);
+        }
+
+        // Delete user cart
+        foreach ($cart as $cartItem) {
+            $cartItem->delete();
         }
 
         return redirect()->route('customer.orders');

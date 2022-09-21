@@ -43,8 +43,10 @@ Route::middleware(['auth'])->group(function () {
     
     // My Orders (Pesananku)
     Route::prefix('pesanan')->group(function () {
-        Route::get('/', [AuthController::class, 'underConstruction'])->name('customer.orders');
-        Route::get('/detail/{order:id_pembelian}', [AuthController::class, 'underConstruction'])->name('customer.orders.detail');
+        Route::get('/', [OrderController::class, 'index'])->name('customer.orders');
+        Route::get('/detail/{order:id_pembelian}', [OrderController::class, 'detail'])->name('customer.orders.detail');
+        Route::post('/{order:id_pembelian}/upload', [OrderController::class, 'uploadPayment'])->name('customer.orders.upload');
+        Route::get('/{order:id_pembelian}/invoice', [OrderController::class, 'invoice'])->name('customer.orders.invoice');
     });
 
     // Profile

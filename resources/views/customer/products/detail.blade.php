@@ -155,10 +155,6 @@
                                 <p>{{ $product->deskripsi_produk }}</p>
                             </div>
                         </div>
-                        <a class="block mt-8" target="_blank" aria-label="Chat on WhatsApp"
-                            href="https://wa.me/6282116214746"> <img alt="Chat on WhatsApp" src={{
-                                url('assets/images/WhatsAppButton.svg') }} />
-                        </a>
                         <div class="mt-8 border-t border-gray-200 pt-8">
                             <h2 class="text-sm font-medium text-gray-900">Kualitas & Perawatan</h2>
 

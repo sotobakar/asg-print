@@ -2,11 +2,66 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
-    public function index (Request $request) {
-        return view('customer.orders.index');
+    public function index(Request $request)
+    {
+        $orders = Order::with(['items', 'user'])
+            ->where('id_user', auth()->id())
+            ->orderBy('id_pembelian', 'desc')
+            ->get();
+
+        return view('customer.orders.index', [
+            'orders' => $orders
+        ]);
+    }
+
+    public function detail(Request $request, Order $order)
+    {
+        $order = $order->load(['items', 'user', 'payment']);
+
+        return view('customer.orders.detail', [
+            'order' => $order
+        ]);
+    }
+
+    public function uploadPayment(Request $request, Order $order)
+    {
+        // Kalau sudah pernah bayar
+        if ($order->payment) {
+            return redirect()->route('customer.orders.detail', ['order' => $order->id_pembelian]);
+        }
+
+        $request->validate([
+            'nama' => 'required',
+            'bank' => 'required',
+            'tanggal_pembayaran' => 'required',
+            'jumlah' => 'required',
+            'bukti' => 'required'
+        ]);
+
+        $bukti = $request->file('bukti');
+
+        $bukti_path = Storage::disk('public')->putFile('bukti', $bukti);
+
+        $paymentCreated = Payment::create([
+            'id_pembelian' => $order->id_pembelian,
+            'nama' => $request->input('nama'),
+            'bank' => $request->input('bank'),
+            'tanggal' => $request->input('tanggal_pembayaran'),
+            'jumlah' => $request->input('jumlah'),
+            'bukti' => $bukti_path
+        ]);
+
+        $order->update([
+            'status_pembelian' => 'paid'
+        ]);
+
+        return redirect()->route('customer.orders.detail', ['order' => $order->id_pembelian]);
     }
 }

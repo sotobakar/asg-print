@@ -73,7 +73,7 @@
                                                 text-base font-medium leading-5 text-gray-700 shadow-sm
                                                 focus:border-indigo-500 focus:outline-none focus:ring-1
                                                 focus:ring-indigo-500 sm:text-sm">
-                                                @for ($i = 1; $i <= $cartItem->sku->stok; $i++)
+                                                @for ($i = 1; $i <= min(10, $cartItem->sku->stok); $i++)
                                                     <option value={{ $i }} {{ $cartItem->jumlah == $i ? 'selected' :
                                                         ''}}> {{ $i }}</option>
                                                     @endfor
@@ -125,7 +125,7 @@
                         <select id="kota_tujuan" name="kota_tujuan"
                             class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                             @foreach($cities as $city)
-                            <option value={{ $city->tarif }}>{{ $city->nama_kota }}</option>
+                            <option value={{ $city->id_ongkir }}>{{ $city->nama_kota }}</option>
                             @endforeach
                         </select>
                     </div>

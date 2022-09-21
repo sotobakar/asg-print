@@ -51,4 +51,12 @@ class User extends Authenticatable
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * Get the orders of user.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'id_user');
+    }
 }
