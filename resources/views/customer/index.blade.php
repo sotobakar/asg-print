@@ -18,7 +18,7 @@
           <p class="mx-auto mt-3 max-w-md text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">Kami menjual berbagai apparel dengan kualitas sablon tinggi, harga kompetitif dan desain sablon yang menarik.</p>
           <div class="mt-10 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-md shadow">
-                  <a href="#"
+                  <a href={{ route('products')}}
                       class="flex w-full items-center justify-center rounded-md border border-transparent bg-primary-700 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg">Produk Kami</a>
               </div>
               <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
