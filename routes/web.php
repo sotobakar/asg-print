@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
@@ -57,7 +61,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/desain', [AuthController::class, 'underConstruction'])->name('customer.design');
 });
 
-Route::prefix('admin')->middleware(['isAdmin'])->group(function () {
-    Route::get('/login', [AuthController::class, 'underConstruction']);
-    Route::get('/register', [AuthController::class, 'underConstruction']);
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AdminAuthController::class, 'loginPage'])->name('admin.login');
+    Route::post('/login', [AdminAuthController::class, 'login']);
+    Route::get('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+    Route::middleware(['isAdmin'])->group(function () {
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+        // Produk
+        Route::prefix('produk')->group(function () {
+            Route::get('/', [AdminProductController::class, 'index'])->name('admin.products');
+            Route::get('/detail/{product:id_produk}', [AdminProductController::class, 'detail'])->name('admin.products.detail');
+        });
+        
+        // Customer
+        Route::prefix('pelanggan')->group(function () {
+            Route::get('/', [AdminCustomerController::class, 'index'])->name('admin.customers');
+            Route::get('/detail/{customer:id}', [AdminCustomerController::class, 'detail'])->name('admin.customers.detail');
+        });
+    });
 });
