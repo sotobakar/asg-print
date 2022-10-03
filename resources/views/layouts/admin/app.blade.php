@@ -180,7 +180,7 @@
                                 Produk
                             </a>
 
-                            <a href="#"
+                            <a href={{ route('admin.orders') }}
                                 class="{{ request()->segment(2) == 'pesanan' ? 'bg-primary-900 text-white' : 'text-indigo-100' }}  hover:bg-primary-800 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor"

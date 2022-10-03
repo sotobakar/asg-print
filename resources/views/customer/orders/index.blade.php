@@ -34,9 +34,9 @@
                             <div class="flex text-sm font-medium">
                                 <a href={{ route('customer.orders.detail', ['order'=> $order->id_pembelian]) }}
                                     class="text-indigo-600 hover:text-indigo-500">Detail pesanan</a>
-                                @if($order->status_pembelian == 'paid')
+                                @if($order->status_pembelian == 'sent')
                                 <div class="ml-4 border-l border-gray-200 pl-4 sm:ml-6 sm:pl-6">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-500">Cetak invoice</a>
+                                    <a href={{ route('customer.orders.invoice.cetak', ['order' => $order->id_pembelian]) }} class="text-indigo-600 hover:text-indigo-500">Cetak invoice</a>
                                 </div>
                                 @endif
                             </div>
@@ -47,7 +47,7 @@
                     <div class="mt-6 -mb-6 flow-root divide-y divide-gray-200 border-t border-gray-200">
                         <div class="py-6 sm:flex">
                             <div class="flex space-x-4 sm:min-w-0 sm:flex-1 sm:space-x-6 lg:space-x-8">
-                                <img src={{ url( 'assets/images/foto_produk/' . $item->sku->product->foto_produk) }}
+                                <img src={{ url( 'storage/' . $item->sku->product->foto_produk) }}
                                 alt="Brass puzzle in the shape of a jack with overlapping rounded posts."
                                 class="h-20 w-20 flex-none rounded-md object-cover object-center">
                                 <div class="min-w-0 flex-1 pt-1.5 sm:pt-0">

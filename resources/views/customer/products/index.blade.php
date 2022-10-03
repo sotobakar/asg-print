@@ -26,7 +26,7 @@
                         <li class="inline-flex w-64 flex-col text-center lg:w-auto">
                             <div class="group relative">
                                 <div class="aspect-square w-full overflow-hidden rounded-md bg-gray-200">
-                                    <img src={{ url('assets/images/foto_produk/' . $product->foto_produk) }}
+                                    <img src={{ url('storage/' . $product->foto_produk) }}
                                     alt="Black machined steel pen with hexagonal grip and small white logo at top."
                                     class="h-full w-full object-cover object-center group-hover:opacity-75">
                                 </div>

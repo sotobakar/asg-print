@@ -80,7 +80,7 @@
                     <!-- Image gallery -->
                     <div class="mt-8 lg:col-span-7 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0">
                         <h2 class="sr-only">Images</h2>
-                        <img src={{ url('assets/images/foto_produk/' . $product->foto_produk) }}
+                        <img src={{ url('storage/' . $product->foto_produk) }}
                         alt="The Beatles Shirt." class="w-full rounded-lg">
                     </div>
 

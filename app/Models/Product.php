@@ -24,6 +24,14 @@ class Product extends Model
     protected $primaryKey = 'id_produk';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['nama_produk', 'id_kategori', 'harga_produk', 'foto_produk', 'deskripsi_produk'];
+
+
+    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
@@ -36,5 +44,13 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'id_kategori');
+    }
+
+    /**
+     * Get the SKUs of product.
+     */
+    public function skus()
+    {
+        return $this->hasMany(ProductSku::class, 'id_produk', 'id_produk');
     }
 }

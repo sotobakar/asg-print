@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
@@ -50,7 +51,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('customer.orders');
         Route::get('/detail/{order:id_pembelian}', [OrderController::class, 'detail'])->name('customer.orders.detail');
         Route::post('/{order:id_pembelian}/upload', [OrderController::class, 'uploadPayment'])->name('customer.orders.upload');
-        Route::get('/{order:id_pembelian}/invoice', [OrderController::class, 'invoice'])->name('customer.orders.invoice');
+        Route::get('/{order:id_pembelian}/invoice', [OrderController::class, 'invoice'])->name('customer.orders.invoice')->withoutMiddleware('auth');
+        Route::get('/{order:id_pembelian}/invoice/cetak', [OrderController::class, 'cetakInvoice'])->name('customer.orders.invoice.cetak');
     });
 
     // Profile
@@ -71,6 +73,10 @@ Route::prefix('admin')->group(function () {
         // Produk
         Route::prefix('produk')->group(function () {
             Route::get('/', [AdminProductController::class, 'index'])->name('admin.products');
+            Route::get('/tambah', [AdminProductController::class, 'createPage'])->name('admin.products.create');
+            Route::put('/{product:id_produk}', [AdminProductController::class, 'update'])->name('admin.products.update');
+
+            Route::post('/', [AdminProductController::class, 'create']);
             Route::get('/detail/{product:id_produk}', [AdminProductController::class, 'detail'])->name('admin.products.detail');
         });
         
@@ -78,6 +84,13 @@ Route::prefix('admin')->group(function () {
         Route::prefix('pelanggan')->group(function () {
             Route::get('/', [AdminCustomerController::class, 'index'])->name('admin.customers');
             Route::get('/detail/{customer:id}', [AdminCustomerController::class, 'detail'])->name('admin.customers.detail');
+        });
+
+        // Customer
+        Route::prefix('pesanan')->group(function () {
+            Route::get('/', [AdminOrderController::class, 'index'])->name('admin.orders');
+            Route::get('/detail/{order:id_pembelian}', [AdminOrderController::class, 'detail'])->name('admin.orders.detail');
+            Route::put('/{order:id_pembelian}/updateStatus', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
         });
     });
 });

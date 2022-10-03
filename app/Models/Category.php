@@ -29,4 +29,12 @@ class Category extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * Get the products of category.
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'id_kategori', 'id_kategori');
+    }
 }

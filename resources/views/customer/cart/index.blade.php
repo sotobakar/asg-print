@@ -35,7 +35,7 @@
                         @foreach($cart as $cartItem)
                         <li class="flex py-6 sm:py-10">
                             <div class="flex-shrink-0">
-                                <img src={{ url('assets/images/foto_produk/' . $cartItem->sku->product->foto_produk) }}
+                                <img src={{ url('storage/' . $cartItem->sku->product->foto_produk) }}
                                 alt="Front of men&#039;s Basic Tee in sienna."
                                 class="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48">
                             </div>

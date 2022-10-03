@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Payment;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Browsershot\Browsershot;
 
 class OrderController extends Controller
 {
@@ -63,5 +66,22 @@ class OrderController extends Controller
         ]);
 
         return redirect()->route('customer.orders.detail', ['order' => $order->id_pembelian]);
+    }
+
+    public function invoice(Request $request, Order $order)
+    {
+        return view('customer.orders.invoice', [
+            'order' => $order
+        ]);
+    }
+
+    public function cetakInvoice(Request $request, Order $order)
+    {
+        Carbon::setLocale('id');
+        $pdf = Pdf::loadView('customer.orders.invoice',[
+            'order' => $order
+        ]);
+
+        return $pdf->stream();
     }
 }

@@ -58,6 +58,10 @@ return [
 
     'asset_url' => env('ASSET_URL'),
 
+    'node_binary_path' => env('NODE_BINARY_PATH'),
+
+    'npm_binary_path' => env('NPM_BINARY_PATH'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

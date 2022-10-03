@@ -66,7 +66,7 @@
 
                         <div class="w-1/5">
                             <div class="aspect-square overflow-hidden rounded-lg bg-gray-50">
-                                <img src={{ url('assets/images/foto_produk/' . $item->sku->product->foto_produk) }}
+                                <img src={{ url('storage/' . $item->sku->product->foto_produk) }}
                                 alt="Off-white t-shirt with circular dot illustration on the front of mountain ridges
                                 that fade."
                                 class="w-full object-cover object-center">
