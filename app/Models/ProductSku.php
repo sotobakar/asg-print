@@ -25,6 +25,14 @@ class ProductSku extends Model
     protected $primaryKey = 'id';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['ukuran', 'stok', 'kode_warna', 'warna', 'id_produk'];
+
+
+    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool

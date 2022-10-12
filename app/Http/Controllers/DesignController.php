@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class DesignController extends Controller
 {
-    public function form(Request $request) {
+    public function index(Request $request) {
         return view('customer.design.form');
     }
 

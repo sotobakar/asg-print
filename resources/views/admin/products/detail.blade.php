@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Daftar Produk')
+@section('title', 'Ubah Produk')
 
 @section('css')
 @endsection
@@ -12,13 +12,26 @@
             <!-- Replace with your content -->
             <!-- This example requires Tailwind CSS v2.0+ -->
             <div class="px-4 sm:px-6 lg:px-8">
-                <div class="sm:flex sm:items-center">
-                    <div class="sm:flex-auto">
-                        <h1 class="text-xl font-semibold text-gray-900">Ubah Produk</h1>
+                @if (session('success'))
+                <div class="rounded-md bg-green-50 p-4 mb-4 ">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <!-- Heroicon name: mini/check-circle -->
+                            <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-green-800">{{ session('success') }}</h3>
+                        </div>
                     </div>
                 </div>
+                @endif
                 @if ($errors->any())
-                <div class="mt-8 sm:w-full sm:max-w-xl rounded-md bg-red-50 p-4">
+                <div class="mb-8 sm:w-full rounded-md bg-red-50 p-4">
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <!-- Heroicon name: mini/x-circle -->
@@ -43,6 +56,11 @@
                     </div>
                 </div>
                 @endif
+                <div class="sm:flex sm:items-center">
+                    <div class="sm:flex-auto">
+                        <h1 class="text-xl font-semibold text-gray-900">Ubah Produk</h1>
+                    </div>
+                </div>
                 <div class="mt-4 flex flex-col">
                     <form action={{ route('admin.products') }} method="POST" enctype="multipart/form-data">
                         @csrf
@@ -135,13 +153,22 @@
                 <div class="mt-8 sm:flex sm:items-center">
                     <div class="sm:flex-auto">
                         <h1 class="text-xl font-semibold text-gray-900">SKU Produk</h1>
-                        <p class="mt-2 text-sm text-gray-700">Stock keeping unit produk. Setiap SKU memiliki variasi dari warna, ukuran, dan stok.</p>
+                        <p class="mt-2 text-sm text-gray-700">Stock keeping unit produk. Setiap SKU memiliki variasi
+                            dari warna, ukuran, dan stok.</p>
                     </div>
                     <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                        <button type="button"
-                            class="inline-flex items-center justify-center rounded-md border border-transparent bg-primary-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:w-auto">Tambah SKU</button>
+                        <a href={{ route('admin.products.skus.create', ['product'=> $product->id_produk]) }}
+                            class="inline-flex items-center justify-center rounded-md border border-transparent
+                            bg-primary-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-700
+                            focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:w-auto">Tambah
+                            SKU</a>
                     </div>
                 </div>
+                @if($product->skus->count() == 0)
+                <div class="py-8">
+                    <h3 class="text-center font-semibold text-xl">Belum Ada SKU</h3>
+                </div>
+                @else
                 <div class="mt-8 flex flex-col">
                     <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -150,11 +177,8 @@
                                     <thead class="bg-gray-50">
                                         <tr>
                                             <th scope="col"
-                                                class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:pl-6">
                                                 ID SKU</th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                Warna</th>
                                             <th scope="col"
                                                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                 Warna</th>
@@ -162,49 +186,48 @@
                                                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                 Ukuran</th>
                                             <th scope="col"
-                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                Stok</th>
+                                                class="px-3 py-3.5 text-right text-sm font-semibold text-gray-900">
+                                                Stok Tersedia</th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5 text-right text-sm font-semibold text-gray-900">
+                                                Terjual</th>
                                             <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                                 <span class="sr-only">Edit</span>
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-white">
-                                        @if($product->skus->count() > 0)
-                                        @else
-                                        @endif
                                         @foreach($product->skus as $sku)
                                         <tr>
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                            <td class="whitespace-nowrap py-4 px-3 text-sm sm:pl-6">
+                                                <div class="text-lg font-medium text-gray-900">{{ $sku->id }}</div>
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 <div class="flex items-center">
-                                                    <div class="h-10 w-10 flex-shrink-0">
-                                                        <img class="h-10 w-10 rounded-full"
-                                                            src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                            alt="">
+                                                    <div class="h-8 w-8 border-2 border-black flex-shrink-0 rounded-full"
+                                                        style="background-color: {{ $sku->kode_warna }}">
                                                     </div>
                                                     <div class="ml-4">
-                                                        <div class="font-medium text-gray-900">Lindsay Walton</div>
-                                                        <div class="text-gray-500">lindsay.walton@example.com</div>
+                                                        <div class="font-medium text-gray-900">{{ ucfirst($sku->warna)
+                                                            }}</div>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <div class="text-gray-900">Front-end Developer</div>
-                                                <div class="text-gray-500">Optimization</div>
+                                                <div class="font-medium text-gray-900 text-lg">{{ $sku->ukuran }}</div>
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <div class="text-gray-900">Front-end Developer</div>
-                                                <div class="text-gray-500">Optimization</div>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-right text-gray-500">
+                                                {{ $sku->stok }}
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <span
-                                                    class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">Active</span>
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Member
+                                            {{-- TODO: Stok terjual --}}
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-right text-gray-500">0
                                             </td>
                                             <td
                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span
+                                                <a href={{ route('admin.products.skus.edit', [
+                                                    'product' => $product->id_produk,
+                                                    'sku' => $sku->id
+                                                ])}} class="text-indigo-600 hover:text-indigo-900">Edit<span
                                                         class="sr-only">, Lindsay Walton</span></a>
                                             </td>
                                         </tr>
@@ -217,6 +240,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
 
 

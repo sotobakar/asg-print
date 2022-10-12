@@ -38,6 +38,9 @@
                                                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Telepon
                                             </th>
                                             <th scope="col"
+                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Alamat
+                                            </th>
+                                            <th scope="col"
                                                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Total Pesanan
                                             </th>
                                             <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -53,6 +56,11 @@
                                                 {{ ucwords($customer->nama) }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $customer->email }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $customer->telepon }}</td>
+                                            @if(strlen($customer->alamat) > 40)
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ substr($customer->alamat, 0, 40) }}...</td>
+                                            @else
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $customer->alamat }}</td>
+                                            @endif
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $customer->total_pesanan }} pesanan</td>
                                             <td
                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
@@ -68,8 +76,6 @@
                     </div>
                 </div>
             </div>
-
-
             <!-- /End replace -->
         </div>
     </div>

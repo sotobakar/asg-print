@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStokUkuranProdukTable extends Migration
+class CreateSkuTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateStokUkuranProdukTable extends Migration
      */
     public function up()
     {
-        Schema::create('stok_ukuran_produk', function (Blueprint $table) {
-            $table->bigIncrements('id')->unique('id');
-            $table->integer('id_produk');
+        Schema::create('sku', function (Blueprint $table) {
+            $table->integer('id', true);
+            $table->integer('id_produk')->index('id_produk');
             $table->enum('ukuran', ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'All Size', 'Normal']);
             $table->integer('stok');
             $table->string('warna', 40);
             $table->string('kode_warna', 40);
+
+            $table->unique(['id'], 'id');
         });
     }
 
@@ -30,6 +32,6 @@ class CreateStokUkuranProdukTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stok_ukuran_produk');
+        Schema::dropIfExists('sku');
     }
 }

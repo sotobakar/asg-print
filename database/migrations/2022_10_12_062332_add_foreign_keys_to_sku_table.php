@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKategoriTable extends Migration
+class AddForeignKeysToSkuTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateKategoriTable extends Migration
      */
     public function up()
     {
-        Schema::create('kategori', function (Blueprint $table) {
-            $table->integer('id_kategori', true);
-            $table->string('nama_kategori', 100);
+        Schema::table('sku', function (Blueprint $table) {
+            $table->foreign(['id_produk'], 'sku_ibfk_1')->references(['id_produk'])->on('produk')->onDelete('CASCADE');
         });
     }
 
@@ -26,6 +25,8 @@ class CreateKategoriTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategori');
+        Schema::table('sku', function (Blueprint $table) {
+            $table->dropForeign('sku_ibfk_1');
+        });
     }
 }

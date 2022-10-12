@@ -98,11 +98,13 @@
                                                 "M,L,XL" }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-right">{{
                                                 $product->stok }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-right">{{
-                                                $product->stok }}</td>
+                                            {{-- TODO: Stok Terjual --}}
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-right">0</td>
                                             <td
                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                <a href={{ route('admin.products.detail', ['product' => $product->id_produk]) }} class="text-indigo-600 hover:text-indigo-900">Ubah</a>
+                                                <a href={{ route('admin.products.detail', ['product'=>
+                                                    $product->id_produk]) }} class="text-indigo-600
+                                                    hover:text-indigo-900">Ubah</a>
                                             </td>
                                         </tr>
                                         @endforeach

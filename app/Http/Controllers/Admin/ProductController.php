@@ -31,21 +31,66 @@ class ProductController extends Controller
     public function detail(Request $request, Product $product)
     {
         $categories = Category::get();
-        
+
         return view('admin.products.detail', [
             'product' => $product,
             'categories' => $categories
         ]);
     }
 
-    public function createSKU(Request $request, Product $product)
+    public function skuCreatePage(Request $request, Product $product)
     {
-
+        return view('admin.products.sku.create', [
+            'product' => $product,
+            'sizes' => ['XS','S','M','L','XL','XXL','XXXL','All Size','Normal']
+        ]);
     }
 
-    public function updateSKU(Request $request, ProductSku $sku)
+    public function skuCreate(Request $request, Product $product)
     {
+        // Validate SKU
+        $validated = $request->validate([
+            'ukuran' => ['required'],
+            'stok' => ['required', 'integer'],
+            'warna' => ['required', 'string'],
+            'kode_warna' => ['required', 'string']
+        ]);
+        
+        $product->skus()->create([
+            'ukuran' => $validated['ukuran'],
+            'kode_warna' => $validated['kode_warna'],
+            'warna' => $validated['warna'],
+            'stok' => $validated['stok'],
+        ]);
 
+        return redirect()->route('admin.products.detail', ['product' => $product])->with('success', 'SKU untuk '. ucwords($product->category->nama_kategori) . ' '. $product->nama_produk .' Berhasil dibuat');
+    }
+
+    public function skuEditPage(Request $request, Product $product, ProductSku $sku)
+    {
+        return view('admin.products.sku.edit', [
+            'sku' => $sku,
+            'product' => $product,
+            'sizes' => ['XS','S','M','L','XL','XXL','XXXL','All Size','Normal']
+        ]);
+    }
+
+    public function skuUpdate(Request $request, Product $product, ProductSku $sku)
+    {
+        // Validate SKU
+        $validated = $request->validate([
+            'ukuran' => ['required'],
+            'stok' => ['required', 'integer'],
+            'warna' => ['required', 'string'],
+            'kode_warna' => ['required', 'string']
+        ]);
+
+        $sku->update($validated);
+
+        return redirect()->route('admin.products.skus.edit', [
+            'product' => $product->id_produk,
+            'sku' => $sku->id
+        ])->with('success', 'Update data SKU berhasil.');
     }
 
     public function createPage(Request $request)

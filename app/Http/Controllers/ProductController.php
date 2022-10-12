@@ -19,14 +19,12 @@ class ProductController extends Controller
         $products = [];
 
         // TODO: Get 4 products for each category
-        $categories = Category::get();
+        $categories = Category::where('nama_kategori', '!=', 'custom')->get();
 
-        foreach($categories as $category) {
-            $products[$category->nama_kategori] = DB::table('produk')
-                                        ->where('id_kategori', $category->id_kategori)
-                                        ->limit(4)
-                                        ->get();
-                                        // ->toArray();
+        foreach ($categories as $category) {
+            $products[$category->nama_kategori] = Product::where('id_kategori', $category->id_kategori)
+                ->limit(4)
+                ->get();
         }
 
         return view('customer.products.index', [
@@ -51,14 +49,22 @@ class ProductController extends Controller
 
         $product->harga_produk = number_format($product->harga_produk);
         $product_colors = ProductSku::select('warna', 'kode_warna')
-                                    ->where('id_produk', $product->id_produk)
-                                    ->distinct()
-                                    ->get();
+            ->where('id_produk', $product->id_produk)
+            ->distinct()
+            ->get();
 
         return view('customer.products.detail', [
             'product' => $product,
             'skus' => $skus,
             'product_colors' => $product_colors
+        ]);
+    }
+
+    public function listByCategory(Request $request, Category $category)
+    {
+        return view('customer.products.by_category', [
+            'category' => $category,
+            'products' => $category->products
         ]);
     }
 }

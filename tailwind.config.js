@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors')
+
 module.exports = {
     content: [
         "./resources/**/*.blade.php",
@@ -22,6 +24,7 @@ module.exports = {
                     900: "#234283",
                 },
                 secondary: "#f07e29",
+                sky: colors.sky,
             },
             width: {
                 a4: "210mm",

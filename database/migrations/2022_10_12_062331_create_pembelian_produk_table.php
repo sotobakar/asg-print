@@ -15,8 +15,8 @@ class CreatePembelianProdukTable extends Migration
     {
         Schema::create('pembelian_produk', function (Blueprint $table) {
             $table->integer('id_pembelian_produk', true);
-            $table->integer('id_pembelian');
-            $table->integer('id_produk');
+            $table->integer('id_pembelian')->index('id_pembelian');
+            $table->integer('id_sku')->nullable()->index('id_sku');
             $table->integer('jumlah');
             $table->string('nama', 100);
             $table->integer('harga');

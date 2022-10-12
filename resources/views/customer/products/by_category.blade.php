@@ -8,17 +8,14 @@
 @section('content')
 <main class="lg:relative">
     <div class="bg-white">
-        @foreach ($all_products as $category => $products)
-        <div class="py-16 sm:py-20 lg:mx-auto lg:max-w-7xl lg:px-8">
-            <div class="flex items-center justify-between px-4 sm:px-6 lg:px-0">
-                <h2 class="text-2xl font-bold tracking-tight text-gray-900">{{ ucwords($category) }}</h2>
-                <a href="{{ route('products.listByCategory', ['category' => Str::slug($category)]) }}"
-                    class="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block">
-                    Lihat seluruhnya
-                    <span aria-hidden="true"> &rarr;</span>
-                </a>
-            </div>
-
+        <div class="py-12 sm:py-16 lg:mx-auto lg:max-w-7xl lg:px-8">
+            <a href="{{ route('products') }}" class="flex items-center text-primary-600">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                  </svg>                  
+                <h4 class="ml-2 font-medium text-xl">Kembali</h4>
+            </a>
+            <h2 class="text-center text-5xl font-bold tracking-tight text-gray-900">{{ ucwords($category->nama_kategori) }}</h2>
             <div class="relative mt-8">
                 <div class="relative -mb-6 w-full overflow-x-auto pb-6">
                     <ul role="list"
@@ -50,7 +47,6 @@
                 </div>
             </div>
         </div>
-        @endforeach
     </div>
 </main>
 @endsection

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOngkirTable extends Migration
+class CreateKategoriTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateOngkirTable extends Migration
      */
     public function up()
     {
-        Schema::create('ongkir', function (Blueprint $table) {
-            $table->integer('id_ongkir', true);
-            $table->string('nama_kota', 100);
-            $table->integer('tarif');
+        Schema::create('kategori', function (Blueprint $table) {
+            $table->integer('id_kategori', true);
+            $table->string('nama_kategori', 100);
+            $table->string('slug', 20);
         });
     }
 
@@ -27,6 +27,6 @@ class CreateOngkirTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ongkir');
+        Schema::dropIfExists('kategori');
     }
 }

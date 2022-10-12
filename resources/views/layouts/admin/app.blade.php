@@ -202,7 +202,7 @@
                                 Customer
                             </a>
 
-                            <a href="#"
+                            <a href={{ route('admin.report') }}
                                 class="{{ request()->segment(2) == 'laporan' ? 'bg-primary-900 text-white' : 'text-indigo-100' }}  hover:bg-primary-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor"
@@ -211,6 +211,17 @@
                                         d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                                 </svg>
                                 Laporan Pembelian
+                            </a>
+
+                            <a href={{ route('admin.design') }}
+                                class="{{ request()->segment(2) == 'design' ? 'bg-primary-900 text-white' : 'text-indigo-100' }}  hover:bg-primary-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="mr-3 h-6 w-6 flex-shrink-0 text-indigo-300">
+                                    <path fill-rule="evenodd"
+                                        d="M20.599 1.5c-.376 0-.743.111-1.055.32l-5.08 3.385a18.747 18.747 0 00-3.471 2.987 10.04 10.04 0 014.815 4.815 18.748 18.748 0 002.987-3.472l3.386-5.079A1.902 1.902 0 0020.599 1.5zm-8.3 14.025a18.76 18.76 0 001.896-1.207 8.026 8.026 0 00-4.513-4.513A18.75 18.75 0 008.475 11.7l-.278.5a5.26 5.26 0 013.601 3.602l.502-.278zM6.75 13.5A3.75 3.75 0 003 17.25a1.5 1.5 0 01-1.601 1.497.75.75 0 00-.7 1.123 5.25 5.25 0 009.8-2.62 3.75 3.75 0 00-3.75-3.75z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                Custom Pesanan
                             </a>
                         </nav>
                     </div>
@@ -230,17 +241,19 @@
                     </button>
                     <div class="flex flex-1 justify-between px-4">
                         <div class="flex flex-1 self-center">
-                            <h3 class="font-medium text-xl">{{ \Carbon\Carbon::now('Asia/Jakarta')->toFormattedDateString(); }}</h3>
+                            <h3 class="font-medium text-xl">{{
+                                \Carbon\Carbon::now('Asia/Jakarta')->toFormattedDateString(); }}</h3>
                         </div>
                         <div class="ml-4 flex items-center md:ml-6">
                             <!-- Profile dropdown -->
                             <div class="relative ml-3">
                                 <div>
                                     <button id="user_menu" type="button"
-                                        class="flex max-w-xs items-center bg-white text-sm"
-                                        id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                        class="flex max-w-xs items-center bg-white text-sm" id="user-menu-button"
+                                        aria-expanded="false" aria-haspopup="true">
                                         <span class="sr-only">Open user menu</span>
-                                        <h4 class="font-medium text-primary-700">{{ ucwords(auth()->user()->nama) }}</h4>
+                                        <h4 class="font-medium text-primary-700">{{ ucwords(auth()->user()->nama) }}
+                                        </h4>
                                     </button>
                                 </div>
 
@@ -259,10 +272,11 @@
                                     role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button"
                                     tabindex="-1">
                                     <!-- Active: "bg-gray-100", Not Active: "" -->
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
-                                        tabindex="-1" id="user-menu-item-0">Profil Anda</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        role="menuitem" tabindex="-1" id="user-menu-item-0">Profil Anda</a>
 
-                                    <a href={{ route('admin.logout') }} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
+                                    <a href={{ route('admin.logout') }}
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
                                         tabindex="-1" id="user-menu-item-2">Logout</a>
                                 </div>
                             </div>
