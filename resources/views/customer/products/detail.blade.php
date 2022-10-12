@@ -13,7 +13,7 @@
                 <ol role="list" class="flex items-center space-x-4">
                     <li>
                         <div class="flex items-center">
-                            <a href="#" class="mr-4 text-sm font-medium text-gray-900">Produk</a>
+                            <a href="{{ route('products') }}" class="mr-4 text-sm font-medium text-gray-900">Produk</a>
                             <svg viewBox="0 0 6 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                 class="h-5 w-auto text-gray-300">
                                 <path d="M4.878 4.34H3.551L.27 16.532h1.327l3.281-12.19z" fill="currentColor" />
@@ -23,7 +23,7 @@
 
                     <li>
                         <div class="flex items-center">
-                            <a href="#" class="mr-4 text-sm font-medium text-gray-900">Baju Band</a>
+                            <a href="{{ route('products.listByCategory', ['category' => $product->category->slug]) }}" class="mr-4 text-sm font-medium text-gray-900">{{ ucwords($product->category->nama_kategori) }}</a>
                             <svg viewBox="0 0 6 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                 class="h-5 w-auto text-gray-300">
                                 <path d="M4.878 4.34H3.551L.27 16.532h1.327l3.281-12.19z" fill="currentColor" />
