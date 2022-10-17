@@ -19,7 +19,7 @@ class ProductController extends Controller
         $products = [];
 
         // TODO: Get 4 products for each category
-        $categories = Category::where('nama_kategori', '!=', 'custom')->get();
+        $categories = Category::get();
 
         foreach ($categories as $category) {
             $products[$category->nama_kategori] = Product::where('id_kategori', $category->id_kategori)

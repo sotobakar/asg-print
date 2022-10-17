@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ongkir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -9,8 +10,10 @@ class UserController extends Controller
 {
     public function profile(Request $request)
     {
+        $cities = Ongkir::get();
         return view('customer.auth.profile', [
-            'user' => $request->user()
+            'user' => $request->user(),
+            'cities' => $cities
         ]);
     }
 
@@ -20,6 +23,7 @@ class UserController extends Controller
             'nama' => ['required', 'string'],
             'alamat' => ['required', 'string'],
             'telepon' => ['required', 'string'],
+            'id_ongkir' => ['required', 'exists:ongkir,id_ongkir']
         ]);
 
         $user = $request->user();

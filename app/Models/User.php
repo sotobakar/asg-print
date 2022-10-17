@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'telepon',
         'alamat',
+        'id_ongkir',
         'role'
     ];
 
@@ -58,5 +59,13 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class, 'id_user');
+    }
+
+    /**
+     * Get the city (for fee) of user.
+     */
+    public function ongkir()
+    {
+        return $this->belongsTo(Ongkir::class, 'id_ongkir', 'id_ongkir');
     }
 }

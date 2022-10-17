@@ -56,15 +56,16 @@
                     </div>
                 </div>
                 @endif
+                <a class="font-medium text-sm text-primary-600" href="{{ back() }}">Kembali Ke Halaman Produk</a>
                 <div class="sm:flex sm:items-center">
                     <div class="sm:flex-auto">
                         <h1 class="text-xl font-semibold text-gray-900">Ubah Produk</h1>
                     </div>
                 </div>
                 <div class="mt-4 flex flex-col">
-                    <form action={{ route('admin.products') }} method="POST" enctype="multipart/form-data">
+                    <form action={{ route('admin.products.update', ['product' => $product->id_produk]) }} method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('POST')
+                        @method('PUT')
                         <div class="space-y-6 sm:space-y-5">
                             <div
                                 class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
@@ -141,8 +142,7 @@
 
                         </div>
                         <div class="flex justify-end">
-                            <a href={{ route('admin.products.update', [ 'product'=> $product->id_produk
-                                ]) }} class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium
+                            <a href={{ route('admin.products') }} class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium
                                 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2
                                 focus:ring-indigo-500 focus:ring-offset-2">Batalkan</a>
                             <button type="submit"

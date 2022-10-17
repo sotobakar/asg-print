@@ -73,7 +73,7 @@
                                                 text-base font-medium leading-5 text-gray-700 shadow-sm
                                                 focus:border-indigo-500 focus:outline-none focus:ring-1
                                                 focus:ring-indigo-500 sm:text-sm">
-                                                @for ($i = 1; $i <= min(10, $cartItem->sku->stok); $i++)
+                                                @for ($i = 1; $i <= min(100, $cartItem->sku->stok); $i++)
                                                     <option value={{ $i }} {{ $cartItem->jumlah == $i ? 'selected' :
                                                         ''}}> {{ $i }}</option>
                                                     @endfor
@@ -120,7 +120,7 @@
                     class="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
                     @csrf
                     @method('POST')
-                    <div>
+                    {{-- <div>
                         <label for="kota_tujuan" class="text-md text-gray-700">Kota tujuan</label>
                         <select id="kota_tujuan" name="kota_tujuan"
                             class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
@@ -142,7 +142,7 @@
                             <label for="alamat_lengkap" class="text-md text-gray-700">Alamat lengkap</label>
                             <textarea rows="4" name="alamat_lengkap" id="alamat_lengkap" autocomplete="street_address" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
                         </div>
-                    </div>
+                    </div> --}}
                     <h2 id="summary-heading" class="mt-4 text-lg font-medium text-gray-900">Yang dibayar</h2>
 
                     <dl class="mt-6 space-y-4">
@@ -154,7 +154,7 @@
                             <dt class="flex items-center text-sm text-gray-600">
                                 <span>Ongkir (flat fee)</span>
                             </dt>
-                            <dd class="text-sm font-medium text-gray-900">Rp 10,000</dd>
+                            <dd class="text-sm font-medium text-gray-900">Rp {{ number_format($ongkir) }}</dd>
                         </div>
                         <div class="flex items-center justify-between border-t border-gray-200 pt-4">
                             <dt class="text-base font-medium text-gray-900">Total yang harus dibayar.</dt>

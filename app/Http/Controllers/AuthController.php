@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ongkir;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,7 +57,8 @@ class AuthController extends Controller
             'nama' => 'required|string|regex:/^[a-zA-Z ]*$/',
             'phone' => 'required|starts_with:0',
             'password' => 'required|confirmed',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'id_ongkir' => 'required|exists:ongkir,id_ongkir'
         ]);
 
         $validated['password'] = bcrypt($validated['password']);
@@ -67,6 +69,7 @@ class AuthController extends Controller
             'password' => $validated['password'],
             'telepon' => $validated['phone'],
             'alamat' => $validated['alamat'],
+            'id_ongkir' => $validated['id_ongkir'],
             'role' => 'customer'
         ]);
 
@@ -88,7 +91,10 @@ class AuthController extends Controller
      */
     public function registerPage(Request $request)
     {
-        return view('customer.auth.register');
+        $cities = Ongkir::get();
+        return view('customer.auth.register', [
+            'cities' => $cities
+        ]);
     }
 
     /**

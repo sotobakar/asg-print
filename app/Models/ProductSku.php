@@ -58,4 +58,12 @@ class ProductSku extends Model
             get: fn ($value, $attributes) => 0
         );
     }
+
+    /**
+     * Get the print design of sku.
+     */
+    public function print_design()
+    {
+        return $this->hasOne(PrintDesign::class, 'id_sku', 'id');
+    }
 }

@@ -60,7 +60,7 @@
                     <h1 class="text-lg font-medium leading-6 text-gray-900">Pengaturan Profil</h1>
                     <p class="mt-1 text-sm text-gray-500">Anda dapat mengubah data profil anda di form berikut.</p>
                 </div>
-    
+
                 <div>
                     <label for="nama" class="block text-sm font-medium text-gray-700">Nama Anda</label>
                     <div class="mt-1">
@@ -75,6 +75,17 @@
                         <input type="text" name="alamat" id="alamat"
                             class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                             value="{{ $user->alamat }}">
+                    </div>
+                </div>
+                <div>
+                    <label for="id_ongkir" class="block text-sm font-medium text-gray-700">Domisili Anda (untuk Ongkir)</label>
+                    <div class="mt-1">
+                        <select name="id_ongkir" id="id_ongkir"
+                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+                            @foreach($cities as $city)
+                            <option value="{{ $city->id_ongkir}}" {{ $city->id_ongkir == $user->id_ongkir ? 'selected' : '' }}>{{ $city->nama_kota }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div>
@@ -101,12 +112,13 @@
                             placeholder="Password Baru Anda disini">
                     </div>
                 </div>
-    
+
                 <div class="flex justify-end">
-                    <button type="button"
+                    <button type="button" onClick="window.location.reload();"
                         class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">Batal</button>
                     <button type="submit"
-                        class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">Simpan Perubahan</button>
+                        class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">Simpan
+                        Perubahan</button>
                 </div>
             </div>
         </form>

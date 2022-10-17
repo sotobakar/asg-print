@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -44,7 +45,7 @@ class CartController extends Controller
         $cities = DB::table('ongkir')
                     ->get();
 
-        $ongkir = 10000;
+        $ongkir = Auth::user()->ongkir->tarif;
 
         return view('customer.cart.index', [
             'cart' => $cart,
@@ -76,23 +77,12 @@ class CartController extends Controller
         $cart = Cart::where('id_user', auth()->id())
             ->get();
 
+        $ongkir = auth()->user()->ongkir;
+        $address = auth()->user()->alamat;
+
         $subtotal = 0;
         foreach ($cart as $cartItem) {
             $subtotal += $cartItem->sku->product->harga_produk * $cartItem->jumlah;
-        }
-
-        // Get city destination (for ongkir)
-        $city_destination = $request->input('kota_tujuan');
-        $ongkir = DB::table('ongkir')
-            ->where('id_ongkir', $city_destination)
-            ->first();
-
-        // Get customer address if box checked (else get custom address)
-        $address = '';
-        if ($request->input('my_address')) {
-            $address = auth()->user()->alamat;
-        } else {
-            $address = $request->input('alamat_lengkap');
         }
 
         // Create order

@@ -40,7 +40,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('customer.logout'
 Route::get('/register', [AuthController::class, 'registerPage'])->name('customer.register');
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'isCustomer'])->group(function () {
     // Cart
     Route::prefix('keranjang')->group(function () {  
         Route::get('/', [CartController::class, 'userCart'])->name('customer.cart');
@@ -111,7 +111,7 @@ Route::prefix('admin')->group(function () {
 
         Route::prefix('laporan')->group(function () {
             Route::get('/', [ReportController::class, 'index'])->name('admin.report');
-            Route::post('/cetak', [ReportController::class, 'cetak'])->name('admin.report.print');
+            Route::get('/cetak', [ReportController::class, 'cetak'])->name('admin.report.print');
         });
 
         Route::prefix('design')->group(function () {
