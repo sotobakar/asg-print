@@ -41,15 +41,18 @@
             <div>
                 <div class="mt-16">
                     <div class="overflow-hidden rounded-full bg-gray-200">
-                        @if($order->status_pembelian == 'pending')
-                        <div class="h-2 rounded-full bg-amber-300" style="width: calc((1) / 8 * 100%)"></div>
+                        @if($order->status_pembelian == 'canceled')
+                        <div class="h-2 rounded-full bg-red-600" style="width: calc((1) / 8 * 100%)"></div>
+                        @elseif($order->status_pembelian == 'pending')
+                        <div class="h-2 rounded-full bg-amber-300" style="width: calc((3) / 8 * 100%)"></div>
                         @elseif($order->status_pembelian == 'paid')
-                        <div class="h-2 rounded-full bg-primary-700" style="width: calc((4) / 8 * 100%)"></div>
+                        <div class="h-2 rounded-full bg-primary-700" style="width: calc((6) / 8 * 100%)"></div>
                         @elseif($order->status_pembelian == 'sent')
                         <div class="h-2 rounded-full bg-green-600" style="width: calc((8) / 8 * 100%)"></div>
                         @endif
                     </div>
-                    <div class="mt-6 hidden grid-cols-3 font-medium text-gray-600 sm:grid">
+                    <div class="mt-6 hidden grid-cols-4 font-medium text-gray-600 sm:grid">
+                        <div class="text-red-600">Dibatalkan</div>
                         <div class="text-amber-300">Menunggu Pembayaran</div>
                         <div class="text-center text-primary-700">Sudah Dibayar</div>
                         <div class="text-right text-green-600">Pesanan Dikirim</div>
@@ -122,7 +125,7 @@
                         <div>
                             <dt class="font-medium text-gray-900">Informasi Pembayaran</dt>
                             <dd class="mt-3 flex">
-                                @if($order->status_pembelian == 'pending')
+                                @if(!$order->payment)
                                 <div>
                                     <h4 class="text-gray-500">Belum Bayar</h4>
                                     <a id="uploadForm" class="mt-2 block font-medium text-primary-700" href="">Upload

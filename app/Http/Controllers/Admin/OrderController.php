@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use App\Models\Product;
-use App\Models\ProductSku;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -34,8 +32,21 @@ class OrderController extends Controller
 
     public function updateStatus(Request $request, Order $order)
     {
+        if ($request->input('status_pembelian') == 'sent') {
+            foreach($order->items as $item) {
+                $current_stock = $item->sku->stok - $item->jumlah;
+                if ($current_stock < 0) {
+                    return back()->withErrors(['Stok barang tidak cukup, silahkan tambah terlebih dahulu.']);
+                }
+
+                $item->sku->update([
+                    'stok' => $current_stock
+                ]);
+            }
+        }
+
         $order->update([
-            'status_pembelian' => 'sent'
+            'status_pembelian' => $request->input('status_pembelian')
         ]);
 
         return back();

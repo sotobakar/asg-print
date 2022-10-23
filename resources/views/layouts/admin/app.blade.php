@@ -7,6 +7,7 @@
     <title>@yield('title')</title>
     <link rel="shortcut icon" href={{ url('assets/images/icon/favicon.ico') }} type="image/x-icon">
     @vite('resources/css/app.css')
+    <script src="https://unpkg.com/alpinejs@3.10.4/dist/cdn.min.js" defer></script>
     @yield('css')
 </head>
 

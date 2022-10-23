@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
     <link rel="shortcut icon" href={{ url('assets/images/icon/favicon.ico') }} type="image/x-icon">
+    <script src="https://unpkg.com/alpinejs@3.10.4/dist/cdn.min.js" defer></script>
     @vite('resources/css/app.css')
     @yield('css')
 </head>

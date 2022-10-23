@@ -38,7 +38,7 @@
     <table width="100%">
         <tr>
             <td valign="top">
-                <img src="data:image/png;base64, {{ $base64String}}" alt="" width="150" /></td>
+                <img src="{{ url('assets/images/logo.jpg') }}" alt="" width="150" /></td>
             <td align="right">
                 <h3>Toko Apparel Sablon ASG Print</h3>
                 <pre>

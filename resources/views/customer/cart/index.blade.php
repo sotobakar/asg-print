@@ -58,6 +58,19 @@
                                         <p class="mt-1 text-sm font-medium text-gray-900">Rp. {{
                                             number_format($cartItem->sku->product->harga_produk * $cartItem->jumlah) }}
                                         </p>
+                                        @if($cartItem->sku->print_design)
+                                        <div class="mt-2 flex flex-col text-sm gap-y-2">
+                                            <div>
+                                                <h4 class="font-medium text-gray-500 hover:text-gray-600">Letak Sablon
+                                                </h4>
+                                                <p>{{ ucwords(str_replace("_", " ", $cartItem->sku->print_design->letak_sablon)) }}</p>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-medium text-gray-500 hover:text-gray-600">Catatan</h4>
+                                                <p>{{ $cartItem->sku->print_design->catatan ?? "-" }}</p>
+                                            </div>
+                                        </div>
+                                        @endif
                                     </div>
 
                                     <div class="mt-4 sm:mt-0 sm:pr-9">
@@ -120,29 +133,6 @@
                     class="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
                     @csrf
                     @method('POST')
-                    {{-- <div>
-                        <label for="kota_tujuan" class="text-md text-gray-700">Kota tujuan</label>
-                        <select id="kota_tujuan" name="kota_tujuan"
-                            class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                            @foreach($cities as $city)
-                            <option value={{ $city->id_ongkir }}>{{ $city->nama_kota }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mt-4 flex items-center">
-                        <input id="my_address" name="my_address" type="checkbox"
-                            class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" checked>
-                        <div class="ml-2 text-base">
-                            <p class="text-gray-700">Gunakan alamat saya saat ini.</p>
-                        </div>
-                    </div>
-                    <div id="custom_address" class="hidden mt-4 flex flex-col gap-y-4">
-                        <h2 class="text-lg font-medium text-gray-900">Alamat Penerima</h2>
-                        <div>
-                            <label for="alamat_lengkap" class="text-md text-gray-700">Alamat lengkap</label>
-                            <textarea rows="4" name="alamat_lengkap" id="alamat_lengkap" autocomplete="street_address" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
-                        </div>
-                    </div> --}}
                     <h2 id="summary-heading" class="mt-4 text-lg font-medium text-gray-900">Yang dibayar</h2>
 
                     <dl class="mt-6 space-y-4">

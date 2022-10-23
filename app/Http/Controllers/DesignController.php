@@ -29,14 +29,14 @@ class DesignController extends Controller
             'kode_warna' => ['required', 'string'],
             'jumlah' => ['required', 'integer'],
             'ukuran' => ['required', 'string'],
-            'catatan' => ['string']
+            'catatan' => ['sometimes', 'nullable', 'string']
         ]);
 
         // Buat Produk sesuai jenis produk dengan nama Custom Order, SKU sesuai warna dan ukuran
         $product = Product::where('nama_produk', 'Custom Sablon')
-                            ->where('id_kategori', $validated['kategori_produk'])
-                            ->first();
-        
+            ->where('id_kategori', $validated['kategori_produk'])
+            ->first();
+
         $sku = $product->skus()->create([
             'ukuran' => $validated['ukuran'],
             'stok' => $validated['jumlah'],

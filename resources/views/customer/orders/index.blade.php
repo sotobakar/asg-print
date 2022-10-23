@@ -29,6 +29,8 @@
                             <p class="text-sm font-medium text-primary-600">Sudah Dibayar</p>
                             @elseif($order->status_pembelian == 'pending')
                             <p class="text-sm font-medium text-yellow-400">Menunggu Pembayaran</p>
+                            @elseif($order->status_pembelian == 'canceled')
+                            <p class="text-sm font-medium text-red-600">Dibatalkan</p>
                             @endif
 
                             <div class="flex text-sm font-medium">

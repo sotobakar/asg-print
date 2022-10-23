@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Product\CreateProductRequest;
 use App\Http\Requests\Admin\Product\UpdateProductRequest;
 use App\Models\Category;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductSku;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
@@ -24,6 +26,12 @@ class ProductController extends Controller
         foreach ($products as $product) {
             $product->stok = ProductSku::where('id_produk', $product->id_produk)
                 ->sum('stok');
+            $product->terjual = OrderItem::whereHas('order', function (Builder $query) {
+                $query->where('status_pembelian', 'sent');
+            })
+            ->whereHas('sku.product', function (Builder $query) use ($product) {
+                $query->where('id_produk', $product->id_produk);
+            })->sum('jumlah');
         }
 
         return view('admin.products.index', [

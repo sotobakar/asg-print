@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 @endif
-                <a class="font-medium text-sm text-primary-600" href="{{ back() }}">Kembali Ke Halaman Produk</a>
+                <a class="mb-4 block font-medium text-md text-secondary" href="{{ route('admin.products') }}">Kembali</a>
                 <div class="sm:flex sm:items-center">
                     <div class="sm:flex-auto">
                         <h1 class="text-xl font-semibold text-gray-900">Ubah Produk</h1>

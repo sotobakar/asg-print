@@ -39,7 +39,7 @@
             </nav>
             <div class="mx-auto mt-8 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 @if (session('success'))
-                <div class="rounded-md bg-green-50 p-4 mb-4 ">
+                <div class="rounded-md bg-green-50 p-4 mb-4" x-show="open" x-data="{ open: true }">
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <!-- Heroicon name: mini/check-circle -->
@@ -61,7 +61,7 @@
                                 <div class="-mx-2 -my-1.5 flex">
                                     <a href={{ route('customer.cart') }}
                                         class="rounded-md bg-green-50 px-2 py-1.5 text-sm font-medium text-green-800 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50">Checkout</a>
-                                    <button type="button"
+                                    <button x-on:click="open = !open" type="button"
                                         class="ml-3 rounded-md bg-green-50 px-2 py-1.5 text-sm font-medium text-green-800 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50">Tutup</button>
                                 </div>
                             </div>

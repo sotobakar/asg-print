@@ -29,4 +29,12 @@ class Ongkir extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * Get the orders of ongkir.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'id_ongkir', 'id_ongkir');
+    }
 }

@@ -57,6 +57,8 @@
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-primary-700">Sudah Dibayar</td>
                                             @elseif($order->status_pembelian == 'sent')
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-green-600">Pesanan Dikirim</td>
+                                            @elseif($order->status_pembelian == 'canceled')
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-red-600">Dibatalkan</td>
                                             @endif
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Rp. {{ number_format($order->total_pembelian, 0, ',', '.') }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $order->tanggal_pembelian }}</td>

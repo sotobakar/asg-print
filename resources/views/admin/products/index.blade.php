@@ -66,10 +66,6 @@
                                                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Harga
                                             </th>
                                             <th scope="col"
-                                                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Ukuran
-                                                Tersedia
-                                            </th>
-                                            <th scope="col"
                                                 class="px-3 py-3.5 text-sm font-semibold text-gray-900 text-right">Stok
                                             </th>
                                             <th scope="col"
@@ -94,12 +90,12 @@
                                                 ucwords($product->category->nama_kategori) }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Rp. {{
                                                 number_format($product->harga_produk, 0, ',', '.') }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{
-                                                "M,L,XL" }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-right">{{
                                                 $product->stok }}</td>
                                             {{-- TODO: Stok Terjual --}}
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-right">0</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-right">{{
+                                                $product->terjual }}
+                                            </td>
                                             <td
                                                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                 <a href={{ route('admin.products.detail', ['product'=>
