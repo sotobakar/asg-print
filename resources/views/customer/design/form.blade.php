@@ -88,6 +88,17 @@
                     </div>
                 </div>
                 <div class="flex gap-x-4">
+                    <div class="w-full">
+                        <label for="bahan_produk" class="block text-sm font-medium text-gray-700">Bahan Produk</label>
+                        <div class="mt-1">
+                            <select name="bahan_produk" id="bahan_produk"
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                <option value="Cotton Combed">Cotton Combed</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-x-4">
                     <div class="w-1/2">
                         <label for="jumlah" class="block text-sm font-medium text-gray-700">Jumlah</label>
                         <div class="mt-1">

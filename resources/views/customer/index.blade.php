@@ -51,6 +51,7 @@
         autoplay: {
             delay: 2000,
         },
+        loop: true
     });
 </script>
 @endsection

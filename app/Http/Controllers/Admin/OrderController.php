@@ -11,16 +11,16 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $orders = Order::with(['user', 'payment'])
-                        ->orderBy('id_pembelian', 'desc')
-                        ->paginate(10);
-        
+            ->orderBy('id_pembelian', 'desc')
+            ->paginate(10);
+
         // Filter order by status
 
         return view('admin.orders.index', [
             'orders' => $orders
         ]);
     }
-    
+
     public function detail(Request $request, Order $order)
     {
         $order = $order->load(['items', 'user']);
@@ -33,10 +33,14 @@ class OrderController extends Controller
     public function updateStatus(Request $request, Order $order)
     {
         if ($request->input('status_pembelian') == 'sent') {
-            foreach($order->items as $item) {
+            foreach ($order->items as $item) {
                 $current_stock = $item->sku->stok - $item->jumlah;
                 if ($current_stock < 0) {
-                    return back()->withErrors(['Stok barang tidak cukup, silahkan tambah terlebih dahulu.']);
+                    return back()->withErrors([
+                        'id_sku' => $item->sku->id,
+                        'nama_produk' => $item->sku->product->nama_produk,
+                        'id_produk' => $item->sku->product->id_produk
+                    ]);
                 }
 
                 $item->sku->update([

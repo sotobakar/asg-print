@@ -28,7 +28,7 @@ class PrintDesign extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_desain_sablon', 'id_sku', 'desain_depan', 'desain_belakang', 'letak_sablon', 'catatan'];
+    protected $fillable = ['id_desain_sablon', 'id_sku', 'desain_depan', 'desain_belakang', 'letak_sablon', 'catatan', 'bahan_produk'];
 
     /**
      * Indicates if the model should be timestamped.

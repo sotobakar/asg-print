@@ -60,10 +60,36 @@
                                         </p>
                                         @if($cartItem->sku->print_design)
                                         <div class="mt-2 flex flex-col text-sm gap-y-2">
-                                            <div>
-                                                <h4 class="font-medium text-gray-500 hover:text-gray-600">Letak Sablon
-                                                </h4>
-                                                <p>{{ ucwords(str_replace("_", " ", $cartItem->sku->print_design->letak_sablon)) }}</p>
+                                            <div class="flex gap-x-4">
+                                                <div>
+                                                    <h4 class="font-medium text-gray-500 hover:text-gray-600">Letak
+                                                        Sablon
+                                                    </h4>
+                                                    <p>{{ ucwords(str_replace("_", " ",
+                                                        $cartItem->sku->print_design->letak_sablon)) }}</p>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-medium text-gray-500 hover:text-gray-600">Bahan
+                                                        Produk
+                                                    </h4>
+                                                    <p>{{ ucwords( $cartItem->sku->print_design->bahan_produk) }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex gap-x-4">
+                                                @if($cartItem->sku->print_design->desain_depan)
+                                                <div>
+                                                    <h4 class="font-medium text-gray-500 hover:text-gray-600">Sablon Depan
+                                                    </h4>
+                                                    <a class="text-primary-600" href="{{ url('storage/' . $cartItem->sku->print_design->desain_depan)}}" target="_blank">Foto</a>
+                                                </div>
+                                                @endif
+                                                @if($cartItem->sku->print_design->desain_belakang)
+                                                <div>
+                                                    <h4 class="font-medium text-gray-500 hover:text-gray-600">Sablon Belakang
+                                                    </h4>
+                                                    <a class="text-primary-600" href="{{ url('storage/' . $cartItem->sku->print_design->desain_belakang)}}" target="_blank">Foto</a>
+                                                </div>
+                                                @endif
                                             </div>
                                             <div>
                                                 <h4 class="font-medium text-gray-500 hover:text-gray-600">Catatan</h4>

@@ -62,6 +62,27 @@
             </button>
           </form>
           @endif
+          @if($errors->any())
+          <div class="mt-2 sm:w-full sm:max-w-xl rounded-md bg-red-50 p-4">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <!-- Heroicon name: mini/x-circle -->
+                <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                  fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
+                    clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="ml-3">
+                <h3 class="text-sm text-red-800"><a class="font-medium"
+                    href="{{ route('admin.products.skus.edit', ['product' => $errors->first('id_produk'), 'sku' => $errors->first('id_sku')]) }}">SKU
+                    #{{ $errors->first('id_sku')}}</a> Produk {{ $errors->first('nama_produk')}}
+                  kehabisan stok. Silahkan restok ulang sku.</h3>
+              </div>
+            </div>
+          </div>
+          @endif
           <dt class="mt-4 text-sm font-medium text-gray-500">Bukti Pembayaran</dt>
           @if($order->payment)
           <dd class="mt-1 text-sm text-primary-600"><a href={{ url('storage/' . $order->payment->bukti) }}
@@ -88,10 +109,17 @@
                       <div x-data="{ open: false }">
                         <button x-on:click="open = !open" class="text-primary-600">Tampilkan Desain Sablon</button>
                         <div class="mt-4 flex flex-col gap-y-2" x-show="open">
-                          <div>
-                            <h3 class="text-sm font-medium text-gray-600">Letak Sablon</h3>
-                            <p class="text-sm font-normal text-black">{{ ucwords(str_replace('_', ' ',
-                              $item->sku->print_design->letak_sablon)) }}</p>
+                          <div class="flex gap-x-4">
+                            <div>
+                              <h3 class="text-sm font-medium text-gray-600">Letak Sablon</h3>
+                              <p class="text-sm font-normal text-black">{{ ucwords(str_replace('_', ' ',
+                                $item->sku->print_design->letak_sablon)) }}</p>
+                            </div>
+                            <div>
+                              <h3 class="text-sm font-medium text-gray-600">Bahan Produk</h3>
+                              <p class="text-sm font-normal text-black">{{ ucwords(
+                                $item->sku->print_design->bahan_produk) }}</p>
+                            </div>
                           </div>
                           <div class="flex gap-x-4">
                             @if($item->sku->print_design->desain_depan)

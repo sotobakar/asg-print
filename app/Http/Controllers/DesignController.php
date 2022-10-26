@@ -25,6 +25,7 @@ class DesignController extends Controller
         $validated = $request->validate([
             'kategori_produk' => ['required', 'integer'],
             'letak_sablon' => ['required', 'string'],
+            'bahan_produk' => ['required', 'string'],
             'warna' => ['required', 'string'],
             'kode_warna' => ['required', 'string'],
             'jumlah' => ['required', 'integer'],

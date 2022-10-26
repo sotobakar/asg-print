@@ -57,7 +57,7 @@
     </h2>
     <h4>{{ $start }} - {{ $end }}</h4>
 
-    <h5 align="center">Statistik Umum</h5>
+    <h5 align="center">Produk Ready Stock</h5>
     <table width="100%" class="statistics">
         <thead style="background-color: lightgray;">
             <tr>
@@ -79,7 +79,7 @@
     </table>
 
     <br>
-    <h5 align="center">Statistik Lain</h5>
+    <h5 align="center">Produk Custom</h5>
     <table width="100%" class="statistics">
         <thead style="background-color: lightgray;">
             <tr>
