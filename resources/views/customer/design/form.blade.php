@@ -70,25 +70,23 @@
                     </div>
                 </div>
                 <div class="flex gap-x-4">
-                    <div class="w-1/2">
+                    <div x-data="{ warna: 'hitam', kode_warna: '#000000' }" class="w-1/2">
                         <label for="warna" class="block text-sm font-medium text-gray-700">Warna</label>
-                        <div class="mt-1">
-                            <input type="text" name="warna" id="warna"
-                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                placeholder="Hitam">
+                        <div class="mt-1 flex items-center">
+                            <i class="fas fa-circle fa-2x mr-4" id="color-circle"
+                                x-bind:style="{ color: `${kode_warna}`}"></i>
+                            <input type="hidden" name="kode_warna" x-bind:value="kode_warna">
+                            <select x-on:change="kode_warna = $el.options[$el.selectedIndex].dataset.warna" name="warna"
+                                id="warna"
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                @foreach($sku_colors as $warna => $kode_warna)
+                                <option data-warna="{{ $kode_warna }}" value="{{ $warna }}">{{ ucwords($warna) }}
+                                </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="w-1/2">
-                        <label for="kode_warna" class="block text-sm font-medium text-gray-700">Kode Warna</label>
-                        <div class="mt-1">
-                            <input type="text" name="kode_warna" id="kode_warna"
-                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                placeholder="#000000">
-                        </div>
-                    </div>
-                </div>
-                <div class="flex gap-x-4">
-                    <div class="w-full">
                         <label for="bahan_produk" class="block text-sm font-medium text-gray-700">Bahan Produk</label>
                         <div class="mt-1">
                             <select name="bahan_produk" id="bahan_produk"

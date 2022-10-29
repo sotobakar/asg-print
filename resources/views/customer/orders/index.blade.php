@@ -38,7 +38,8 @@
                                     class="text-indigo-600 hover:text-indigo-500">Detail pesanan</a>
                                 @if($order->status_pembelian == 'sent')
                                 <div class="ml-4 border-l border-gray-200 pl-4 sm:ml-6 sm:pl-6">
-                                    <a href={{ route('customer.orders.invoice.cetak', ['order' => $order->id_pembelian]) }} class="text-indigo-600 hover:text-indigo-500">Cetak invoice</a>
+                                    <a href={{ route('customer.orders.invoice.cetak', ['order'=> $order->id_pembelian])
+                                        }} class="text-indigo-600 hover:text-indigo-500">Cetak invoice</a>
                                 </div>
                                 @endif
                             </div>
@@ -52,7 +53,7 @@
                                 <img src={{ url( 'storage/' . $item->sku->product->foto_produk) }}
                                 alt="Brass puzzle in the shape of a jack with overlapping rounded posts."
                                 class="h-20 w-20 flex-none rounded-md object-cover object-center">
-                                <div class="min-w-0 flex-1 pt-1.5 sm:pt-0">
+                                <div class="min-w-0 pt-1.5 sm:pt-0">
                                     <h3 class="text-sm font-medium text-gray-900">
                                         <a href="#">{{ $item->sku->product->nama_produk }}</a>
                                     </h3>
@@ -64,6 +65,16 @@
                                     <p class="mt-1 font-medium text-gray-900">Rp. {{ number_format($item->subharga) }}
                                     </p>
                                 </div>
+                                @if($item->sku->print_design)
+                                @if($item->sku->print_design->desain_depan)
+                                <img class="h-20 w-20 flex-none rounded-md object-cover object-center"
+                                    src="{{ url('storage/' . $item->sku->print_design->desain_depan) }}" alt="">
+                                @endif
+                                @if($item->sku->print_design->desain_belakang)
+                                <img class="h-20 w-20 flex-none rounded-md object-cover object-center"
+                                    src="{{ url('storage/' . $item->sku->print_design->desain_belakang) }}" alt="">
+                                @endif
+                                @endif
                             </div>
                             <div>
                                 <h3 class="text-lg">Jumlah:</h3>

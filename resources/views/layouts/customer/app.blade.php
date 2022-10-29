@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href={{ url('assets/images/icon/favicon.ico') }} type="image/x-icon">
     <script src="https://unpkg.com/alpinejs@3.10.4/dist/cdn.min.js" defer></script>
     @vite('resources/css/app.css')
+    <link rel="stylesheet" href="{{ url('assets/css/all.min.css') }}">
     @yield('css')
 </head>
 
