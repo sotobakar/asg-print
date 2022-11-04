@@ -19,7 +19,7 @@
             <div class="relative mt-8">
                 <div class="relative -mb-6 w-full overflow-x-auto pb-6">
                     <ul role="list"
-                        class="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-x-8 lg:space-x-0">
+                        class="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-x-8 gap-y-8 lg:space-x-0">
                         @foreach ($products as $product)
                         <li class="inline-flex w-64 flex-col text-center lg:w-auto">
                             <div class="group relative">
@@ -29,7 +29,6 @@
                                     class="h-full w-full object-cover object-center group-hover:opacity-75">
                                 </div>
                                 <div class="mt-6">
-                                    <p class="text-sm text-gray-500">M | L | XL | XXL</p>
                                     <h3 class="mt-1 font-semibold text-gray-900">
                                         <a
                                             href="{{ route('customer.products.detail', ['product' => $product->id_produk]) }}">

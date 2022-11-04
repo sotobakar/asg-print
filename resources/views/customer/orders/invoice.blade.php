@@ -25,7 +25,7 @@
 
   <table width="100%">
     <tr>
-        <td valign="top"><img src={{ url('assets/images/logo.png')}} alt="" width="150"/></td>
+        <td valign="top"><img src={{ url('assets/images/logo.jpg')}} alt="" width="150"/></td>
         <td align="right">
             <h3>Toko Apparel Sablon ASG Print</h3>
             <pre>

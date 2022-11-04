@@ -26,7 +26,7 @@ class IsAdmin extends Middleware
             return $next($request);
         }
 
-        return redirect()->route('admin.login');
+        return redirect()->route('admin.login')->withErrors('Anda bukan Admin.');
     }
 
     /**

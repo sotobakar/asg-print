@@ -77,9 +77,6 @@
                                     <select id="ukuran" name="ukuran" autocomplete="ukuran"
                                         class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm">
                                         @foreach($sizes as $size)
-                                        <option value="{{ $size }}">{{ $size }}</option>
-                                        @endforeach
-                                        @foreach($sizes as $size)
                                         <option value="{{ $size }}" {{ $size==$sku->ukuran ? 'selected': '' }}>{{
                                             ucwords($size) }}</option>
                                         @endforeach
@@ -98,25 +95,21 @@
                                     focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm">
                                 </div>
                             </div>
-                            <div
-                                class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                <label for="warna"
-                                    class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Warna</label>
-                                <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                    <input type="text" name="warna" id="warna" autocomplete="warna"
-                                        value="{{ $sku->warna }}"
-                                        class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm">
-                                </div>
-                            </div>
-                            <div
-                                class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                <label for="kode_warna"
-                                    class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Kode Warna (cth:
-                                    #FFFFFF untuk Putih)</label>
-                                <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                    <input type="text" name="kode_warna" id="kode_warna" autocomplete="kode_warna"
-                                        value="{{ $sku->kode_warna }}"
-                                        class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm">
+                            <div x-data="{ warna: 'hitam', kode_warna: '{{ $sku->kode_warna }}' }" class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                                <label for="warna" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Warna</label>
+                                <div class="mt-1 sm:col-span-2 flex items-center max-w-lg sm:max-w-xs">
+                                    <i class="fas fa-circle fa-2x mr-4" id="color-circle"
+                                        x-bind:style="{ color: `${kode_warna}`}"></i>
+                                    <input type="hidden" name="kode_warna" x-bind:value="kode_warna">
+                                    <select x-on:change="kode_warna = $el.options[$el.selectedIndex].dataset.warna"
+                                        name="warna" id="warna"
+                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                        @foreach($sku_colors as $warna => $kode_warna)
+                                        <option data-warna="{{ $kode_warna }}" value="{{ $warna }}" {{ $warna == $sku->warna ? 'selected': '' }}>{{ ucwords($warna)
+                                            }}
+                                        </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
