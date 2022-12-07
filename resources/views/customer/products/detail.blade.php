@@ -23,7 +23,9 @@
 
                     <li>
                         <div class="flex items-center">
-                            <a href="{{ route('products.listByCategory', ['category' => $product->category->slug]) }}" class="mr-4 text-sm font-medium text-gray-900">{{ ucwords($product->category->nama_kategori) }}</a>
+                            <a href="{{ route('products.listByCategory', ['category' => $product->category->slug]) }}"
+                                class="mr-4 text-sm font-medium text-gray-900">{{
+                                ucwords($product->category->nama_kategori) }}</a>
                             <svg viewBox="0 0 6 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                                 class="h-5 w-auto text-gray-300">
                                 <path d="M4.878 4.34H3.551L.27 16.532h1.327l3.281-12.19z" fill="currentColor" />
@@ -69,6 +71,7 @@
                     </div>
                 </div>
                 @endif
+
                 <div class="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
                     <div class="lg:col-span-5 lg:col-start-8">
                         <div class="flex justify-between">
@@ -84,11 +87,33 @@
                         alt="The Beatles Shirt." class="w-full rounded-lg">
                     </div>
 
-                    <div class="mt-8 lg:col-span-5">
+                    <div class="lg:col-span-5">
+                        @if($errors->any())
+                        <div class="my-2 sm:w-full sm:max-w-xl rounded-md bg-red-100 px-4 py-2" x-show="open" x-data="{ open: true }">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0">
+                                    <!-- Heroicon name: mini/x-circle -->
+                                    <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    @foreach($errors->all() as $error)
+                                    <h3 class="text-sm text-red-800">{{ $error }}</h3>
+                                    @endforeach
+                                </div>
+                                <button x-on:click="open = !open" type="button"
+                                    class="ml-auto rounded-md bg-red-100 px-2 py-1.5 text-sm font-medium text-red-800 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-red-100">Tutup</button>
+                            </div>
+                        </div>
+                        @endif
                         <form>
                             @if ($product_colors->count() > 0)
                             <!-- Color picker -->
-                            <div>
+                            <div class="mt-2">
                                 <h2 class="text-sm font-medium text-gray-900">Pilih warna</h2>
 
                                 <fieldset class="mt-2">

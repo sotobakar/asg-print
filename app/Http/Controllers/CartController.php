@@ -13,6 +13,10 @@ class CartController extends Controller
 {
     public function add(Request $request)
     {
+        if (!$request->input('sku')) {
+            return back()->withErrors(['Anda belum memilih SKU.']);
+        }
+
         $cartItem = Cart::where('id_user', auth()->id())
             ->where('id_sku', $request->input('sku')[0])
             ->first();
