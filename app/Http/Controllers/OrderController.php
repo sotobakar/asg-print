@@ -75,6 +75,18 @@ class OrderController extends Controller
         ]);
     }
 
+    public function receive(Request $request, Order $order) {
+        if ($order->status_pembelian != 'sent') {
+            return back();
+        }
+
+        $order->received()->create([
+            'waktu_diterima' => \Carbon\Carbon::now() 
+        ]);
+
+        return back()->with('success', 'Pesanan #' . $order->id_pembelian . ' berhasil diterima.');
+    }
+
     public function cetakInvoice(Request $request, Order $order)
     {
         Carbon::setLocale('id');

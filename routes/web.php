@@ -56,6 +56,7 @@ Route::middleware(['auth', 'isCustomer'])->group(function () {
         Route::get('/detail/{order:id_pembelian}', [OrderController::class, 'detail'])->name('customer.orders.detail');
         Route::post('/{order:id_pembelian}/upload', [OrderController::class, 'uploadPayment'])->name('customer.orders.upload');
         Route::get('/{order:id_pembelian}/invoice', [OrderController::class, 'invoice'])->name('customer.orders.invoice')->withoutMiddleware('auth');
+        Route::get('/{order:id_pembelian}/terima', [OrderController::class, 'receive'])->name('customer.orders.receive');
         Route::get('/{order:id_pembelian}/invoice/cetak', [OrderController::class, 'cetakInvoice'])->name('customer.orders.invoice.cetak');
     });
 

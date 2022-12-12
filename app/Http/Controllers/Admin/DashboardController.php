@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ongkir;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\OrderReceived;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -33,8 +34,12 @@ class DashboardController extends Controller
         $statistics['orders_total'] = Order::count();
         $statistics['products_total'] = Product::count();
 
+        // TODO: Cek penerimaan produk terbaru.
+        $receivedOrders = OrderReceived::orderBy('waktu_diterima', 'desc')->simplePaginate(3);
+
         return view('admin.index', [
-            'statistics' => $statistics
+            'statistics' => $statistics,
+            'receivedOrders' => $receivedOrders
         ]);
     }
 }

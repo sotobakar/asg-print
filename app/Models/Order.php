@@ -68,4 +68,13 @@ class Order extends Model
     {
         return $this->hasOne(Payment::class, 'id_pembelian', 'id_pembelian');
     }
+
+    /**
+     * Check if order has been received by user.
+     * 
+     */
+    public function received()
+    {
+        return $this->hasOne(OrderReceived::class, 'id_pembelian', 'id_pembelian');
+    }
 }
